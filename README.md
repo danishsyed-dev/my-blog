@@ -165,4 +165,4 @@ MIT License - feel free to use this template for your own portfolio!
 
 ---
 
-Built with ❤️ by Danish Syed
+Built with ❤️ by Syed Danish Ali

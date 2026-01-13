@@ -23,17 +23,17 @@ Retrieval-Augmented Generation (RAG) has become the go-to approach for grounding
 
 The system consists of three main components:
 
-1. **Document Ingestion Pipeline** - Handles PDF, DOCX, and plain text files
-2. **Vector Store** - Uses FAISS for efficient similarity search
-3. **Generation Layer** - Integrates with OpenAI's GPT models
+1. Document Ingestion Pipeline  - Handles PDF, DOCX, and plain text files
+2. Vector Store                 - Uses FAISS for efficient similarity search
+3. Generation Layer             - Integrates with OpenAI's GPT models
 
 ## Chunking Strategy
 
 One of the most critical decisions in RAG is how to chunk your documents. I experimented with:
 
-- **Fixed-size chunks** (500 tokens with 50-token overlap)
-- **Semantic chunks** (using sentence boundaries)
-- **Recursive chunking** (hierarchical splitting)
+- Fixed-size chunks     (500 tokens with 50-token overlap)
+- Semantic chunks       (using sentence boundaries)
+- Recursive chunking    (hierarchical splitting)
 
 Semantic chunking with sentence boundaries showed the best retrieval quality.
 
@@ -59,7 +59,7 @@ Building a RAG system requires careful attention to each component in the pipeli
         content: `
 ## The Challenge
 
-Cancer prediction requires models that are not just accurate, but also interpretable. Medical professionals need to understand *why* a model makes a prediction before trusting it with patient diagnoses.
+Cancer prediction requires models that are not just accurate, but also interpretable. Medical professionals need to understand why a model makes a prediction before trusting it with patient diagnoses.
 
 ## Models Evaluated
 
@@ -78,10 +78,10 @@ I tested 8 different algorithms:
 
 For medical applications, accuracy alone is insufficient. I focused on:
 
-- **Sensitivity (Recall)** - Minimizing missed diagnoses
-- **Specificity** - Reducing false positives
-- **F1-Score** - Balanced measure
-- **AUC-ROC** - Overall discriminative ability
+- Sensitivity (Recall) - Minimizing missed diagnoses
+- Specificity          - Reducing false positives
+- F1-Score             - Balanced measure
+- AUC-ROC              - Overall discriminative ability
 
 ## Key Findings
 
@@ -127,10 +127,10 @@ Collecting football data involves:
 
 Beyond basic stats, I engineered:
 
-- **Expected Goals (xG)** - Shot quality metric
-- **Progressive Carries** - Ball advancement measure
-- **Pressing Intensity** - Defensive contribution
-- **Shot-Creating Actions** - Chance creation
+- Expected Goals (xG)   - Shot quality metric
+- Progressive Carries   - Ball advancement measure
+- Pressing Intensity    - Defensive contribution
+- Shot-Creating Actions - Chance creation
 
 ## Handling Temporal Data
 

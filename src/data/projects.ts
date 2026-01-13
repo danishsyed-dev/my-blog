@@ -6,7 +6,7 @@ export interface Project {
   methodology: string;
   results: string;
   tools: string[];
-  githubUrl: string;
+  githubUrl?: string;
   datasetUrl?: string;
   paperUrl?: string;
   liveUrl?: string;
@@ -18,14 +18,14 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: 'hot-topic-trends',
+    id: 'identifying-hot-topic-trends',
     title: 'Identifying Hot Topic Trends in Streaming Text Data',
     description: 'A research project focused on detecting and classifying emerging hot topics from real-time streaming text data using machine learning and NLP techniques.',
     problemStatement: 'Social media and news platforms generate massive volumes of text data in real-time. Identifying trending topics quickly and accurately is crucial for applications in news aggregation, social listening, and market analysis. Traditional batch processing methods fail to capture the temporal dynamics of emerging trends.',
     methodology: 'Implemented a streaming data pipeline to process text data in real-time. Applied TF-IDF vectorization combined with clustering algorithms (K-Means, DBSCAN) to group similar content. Developed a trend detection algorithm based on topic velocity and acceleration metrics. Used sentiment analysis to classify topic polarity.',
     results: 'Achieved 87% accuracy in identifying emerging topics within a 15-minute window. The system successfully detected trend shifts 40% faster than baseline batch processing methods. Demonstrated scalability to handle 10,000+ documents per minute.',
     tools: ['Python', 'Scikit-learn', 'NLTK', 'Pandas', 'Kafka', 'Spark Streaming'],
-    githubUrl: 'https://github.com/danishsyed-dev/hot-topic-trends',
+    githubUrl: 'https://github.com/danishsyed-dev/Identifying-Hot-Topic-Trends',
     featured: true,
     category: 'nlp',
     date: '2025-12'
@@ -38,7 +38,8 @@ export const projects: Project[] = [
     methodology: 'Conducted a rigorous evaluation of 8 machine learning algorithms including Logistic Regression, Random Forest, XGBoost, SVM, and Neural Networks. Applied cross-validation, feature importance analysis, and SHAP values for model interpretability. Tested on multiple cancer datasets including breast, lung, and colorectal cancer.',
     results: 'XGBoost achieved the highest F1-score of 0.94 for breast cancer prediction. Identified that ensemble methods consistently outperform single models. SHAP analysis revealed key biomarkers that align with clinical literature, enhancing model trustworthiness.',
     tools: ['Python', 'Scikit-learn', 'XGBoost', 'SHAP', 'Pandas', 'Matplotlib', 'Seaborn'],
-    githubUrl: 'https://github.com/danishsyed-dev/cancer-prediction-ml',
+    githubUrl: 'https://github.com/danishsyed-dev/Scrutinizing-ML-Models-for-Cancer-Prediction',
+    paperUrl: 'https://ijitce.org/index.php/ijitce/article/view/1161',
     featured: true,
     category: 'ml',
     date: '2025-11'
@@ -51,7 +52,7 @@ export const projects: Project[] = [
     methodology: 'Built a modular RAG pipeline with document ingestion, chunking strategies (semantic vs fixed-size), and vector embeddings using sentence-transformers. Implemented FAISS for efficient similarity search. Created a FastAPI backend with async processing for concurrent queries. Added re-ranking using cross-encoders for improved relevance.',
     results: 'Reduced response latency to under 2 seconds for document retrieval + generation. Achieved 92% relevance score in user evaluations. The API handles 100+ concurrent requests with horizontal scaling support.',
     tools: ['Python', 'FastAPI', 'LangChain', 'FAISS', 'Sentence-Transformers', 'OpenAI API', 'Docker'],
-    githubUrl: 'https://github.com/danishsyed-dev/rag-fastapi',
+    githubUrl: 'https://github.com/danishsyed-dev/RAG-API',
     featured: true,
     category: 'nlp',
     date: '2025-10'
@@ -64,11 +65,24 @@ export const projects: Project[] = [
     methodology: 'Collected comprehensive player statistics from multiple seasons. Engineered advanced metrics including Expected Goals (xG), Expected Assists (xA), progressive carries, and pressing intensity. Applied clustering to identify player archetypes. Built predictive models for future performance based on age curves and historical trajectories.',
     results: 'Identified 5 distinct forward archetypes in La Liga. Predictive model achieved 0.78 correlation with next-season goal output. Analysis revealed undervalued players with high xG overperformance, providing actionable scouting insights.',
     tools: ['Python', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'Scikit-learn', 'Plotly'],
-    githubUrl: 'https://github.com/danishsyed-dev/laliga-analytics',
+    githubUrl: 'https://github.com/danishsyed-dev/laliga-forwards-analytics',
     datasetUrl: 'https://fbref.com',
     featured: true,
     category: 'analytics',
     date: '2025-09'
+  },
+  {
+    id: 'Image_to_pdf',
+    title: 'Image to PDF Converter',
+    description: 'A simple image to PDF converter built with Python and Pillow.',
+    problemStatement: 'Many users find it inconvenient to convert images to PDFs manually. A simple and efficient tool can save time and effort.',
+    methodology: 'Designed a simple image to PDF converter with Python and Pillow. Implemented adaptive difficulty based on user consistency. Created a reward structure that encourages streak maintenance without punishing occasional misses. Built with modern web technologies for cross-platform accessibility.',
+    results: 'Users reported increased convenience and time savings.',
+    tools: ['Python', 'Pillow', 'Pillow-heif'],
+    githubUrl: 'https://github.com/danishsyed-dev/Image_to_pdf',
+    featured: false,
+    category: 'web',
+    date: '2025-07'
   },
   {
     id: 'life-rpg',
@@ -78,7 +92,7 @@ export const projects: Project[] = [
     methodology: 'Designed a comprehensive gamification framework with XP systems, skill trees, daily quests, and achievement badges. Implemented adaptive difficulty based on user consistency. Created a reward structure that encourages streak maintenance without punishing occasional misses. Built with modern web technologies for cross-platform accessibility.',
     results: 'User testing showed 65% higher engagement compared to standard habit trackers. Users reported increased motivation and sense of progress. The flexible architecture supports custom skill definitions for personalized experiences.',
     tools: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Firebase', 'Framer Motion'],
-    githubUrl: 'https://github.com/danishsyed-dev/life-rpg',
+    githubUrl: 'https://github.com/danishsyed-dev/Life-RPG',
     featured: false,
     category: 'web',
     date: '2025-08'
@@ -91,8 +105,8 @@ export const projects: Project[] = [
     methodology: 'Built web scrapers to collect data from multiple weather APIs and websites. Implemented data normalization and conflict resolution when sources disagree. Created an interactive dashboard with charts for temperature, precipitation, and wind patterns. Added location-based alerts for severe weather conditions.',
     results: 'Successfully aggregates data from 5+ weather sources with 99.5% uptime. Interactive visualizations improved user understanding of weather patterns. Alert system achieved 95% accuracy for precipitation predictions within 2-hour windows.',
     tools: ['Python', 'Beautiful Soup', 'Requests', 'Flask', 'Chart.js', 'SQLite'],
-    githubUrl: 'https://github.com/danishsyed-dev/weather-scraper',
-    liveUrl: 'https://weather-scraper-demo.vercel.app',
+    githubUrl: 'https://github.com/danishsyed-dev/Weather-scraper',
+    liveUrl: 'https://syeddanishali.me/weather-scraper',
     featured: false,
     category: 'web',
     date: '2025-07'

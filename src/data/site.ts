@@ -19,9 +19,9 @@ export const siteConfig = {
     // Social Links
     social: {
         github: 'https://github.com/danishsyed-dev',
-        linkedin: 'https://linkedin.com/in/danishsyed',
-        scholar: 'https://scholar.google.com/citations?user=YOUR_ID', // Update with your ID
-        email: 'contact@danishsyed.dev', // Update with your email
+        linkedin: 'https://www.linkedin.com/in/syed-danish-ali-70b36334a/',
+        scholar: 'https://scholar.google.com/citations?user=Xt1MelQAAAAJ&hl=en',
+        email: 'contact@danishsyed.dev',
     },
 
     // About Section Content

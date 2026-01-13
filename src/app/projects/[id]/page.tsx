@@ -70,9 +70,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 {/* Header */}
                 <header className="mb-12">
                     <div className="flex items-center gap-4 mb-4">
-                        <span className={`tag ${categoryColors[project.category]}`}>
+                        <Link
+                            href={`/projects?category=${project.category}`}
+                            className={`tag ${categoryColors[project.category]} hover:opacity-80 transition-opacity`}
+                        >
                             {categoryLabels[project.category]}
-                        </span>
+                        </Link>
                         <span className="text-sm text-[var(--foreground-subtle)]">{project.date}</span>
                     </div>
                     <h1 className="font-serif text-3xl md:text-4xl font-bold text-[var(--foreground)] mb-4">

@@ -32,12 +32,12 @@ export default function PublicationsPage() {
                             >
                                 <div className="flex items-center gap-3 mb-3">
                                     <span className={`text-xs font-medium px-2 py-1 rounded ${pub.status === 'published'
-                                            ? 'bg-emerald-400/10 text-emerald-400'
-                                            : pub.status === 'preprint'
-                                                ? 'bg-blue-400/10 text-blue-400'
-                                                : pub.status === 'under-review'
-                                                    ? 'bg-yellow-400/10 text-yellow-400'
-                                                    : 'bg-gray-400/10 text-gray-400'
+                                        ? 'bg-emerald-400/10 text-emerald-400'
+                                        : pub.status === 'preprint'
+                                            ? 'bg-blue-400/10 text-blue-400'
+                                            : pub.status === 'under-review'
+                                                ? 'bg-yellow-400/10 text-yellow-400'
+                                                : 'bg-gray-400/10 text-gray-400'
                                         }`}>
                                         {pub.status.replace('-', ' ').toUpperCase()}
                                     </span>
@@ -92,6 +92,19 @@ export default function PublicationsPage() {
                                             arXiv
                                         </a>
                                     )}
+                                    {pub.ResearchGateUrl && (
+                                        <a
+                                            href={pub.ResearchGateUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="flex items-center gap-2 text-[var(--foreground-muted)] hover:text-[var(--accent)] transition-colors"
+                                        >
+                                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M19.586 0c-.818 0-1.508.19-2.073.565-.563.377-.97.936-1.213 1.68a3.193 3.193 0 0 0-.112.437 8.365 8.365 0 0 0-.078.53 9 9 0 0 0-.05.727c-.01.282-.013.621-.013 1.016a31.121 31.213 0 0 0 .014 1.017 9 9 0 0 0 .05.727 7.946 7.946 0 0 0 .078.53h-.005a3.334 3.334 0 0 0 .112.438c.244.743.65 1.303 1.214 1.68.565.376 1.256.564 2.075.564.8 0 1.536-.213 2.105-.603.57-.39.94-.916 1.175-1.65.076-.235.135-.558.177-.93a10.9 10.9 0 0 0 .043-1.207v-.82c0-.095-.047-.142-.14-.142h-3.064c-.094 0-.14.047-.14.141v.956c0 .094.046.14.14.14h1.666c.056 0 .084.03.084.086 0 .36 0 .62-.036.865-.038.244-.1.447-.147.606-.108.316-.275.554-.493.717-.218.163-.518.244-.87.244-.297 0-.554-.062-.77-.186a1.433 1.433 0 0 1-.513-.502 2.212 2.212 0 0 1-.262-.755 5.544 5.544 0 0 1-.07-.9V7.87c0-.361.014-.674.043-.935a2.232 2.232 0 0 1 .262-.755c.136-.23.318-.41.53-.54.212-.128.48-.194.8-.194.254 0 .47.06.655.178.186.117.332.27.45.458.115.186.2.395.254.618.053.223.08.453.08.69 0 .094.047.14.14.14h1.302c.094 0 .14-.046.14-.14 0-.413-.047-.814-.14-1.202a3.212 3.212 0 0 0-.48-1.07c-.22-.318-.506-.573-.86-.764-.355-.19-.783-.286-1.285-.286zm-9.793.61c-.61 0-1.12.083-1.53.25a2.093 2.093 0 0 0-.99.713 2.632 2.632 0 0 0-.488 1.07 7.464 7.464 0 0 0-.125 1.368 7.465 7.465 0 0 0 .125 1.37c.078.406.24.752.488 1.068.248.316.58.567.99.712.41.146.92.22 1.53.22h.257c.093 0 .14.046.14.14v.203c0 .328-.015.62-.048.873a2.283 2.283 0 0 1-.204.68 1.08 1.08 0 0 1-.433.456c-.18.11-.43.163-.746.163H5.9c-.093 0-.14.047-.14.14v.974c0 .094.047.14.14.14h2.143c.61 0 1.12-.082 1.53-.248a2.093 2.093 0 0 0 .99-.714c.249-.316.41-.662.489-1.068a7.464 7.464 0 0 0 .125-1.37V2.38c0-.093-.047-.14-.14-.14H9.793zm.257 1.258h.957c.094 0 .14.047.14.14v3.506c0 .094-.046.141-.14.141h-.957c-.32 0-.56-.054-.74-.163a1.074 1.074 0 0 1-.422-.456 2.231 2.231 0 0 1-.203-.68 8.116 8.116 0 0 1-.05-.873c0-.327.017-.618.05-.872.033-.254.1-.482.203-.68a1.08 1.08 0 0 1 .423-.456c.18-.11.42-.163.74-.163z" />
+                                            </svg>
+                                            ResearchGate
+                                        </a>
+                                    )}
                                     {pub.codeUrl && (
                                         <a
                                             href={pub.codeUrl}
@@ -137,7 +150,7 @@ export default function PublicationsPage() {
                     </h2>
                     <div className="flex flex-wrap justify-center gap-6">
                         <a
-                            href="https://scholar.google.com"
+                            href="https://scholar.google.com/citations?user=Xt1MelQAAAAJ&hl=en"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-2 text-[var(--foreground-muted)] hover:text-[var(--accent)] transition-colors"
@@ -159,7 +172,7 @@ export default function PublicationsPage() {
                             ORCID
                         </a>
                         <a
-                            href="https://researchgate.net"
+                            href="https://www.researchgate.net/profile/Syed-Danish-Ali?ev=hdr_xprf"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-2 text-[var(--foreground-muted)] hover:text-[var(--accent)] transition-colors"

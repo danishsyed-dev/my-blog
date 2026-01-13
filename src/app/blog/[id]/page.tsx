@@ -43,12 +43,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         const elements: React.ReactNode[] = [];
         let currentList: string[] = [];
         let listType: 'ul' | 'ol' | null = null;
+        let keyCounter = 0;
 
         const flushList = () => {
             if (currentList.length > 0 && listType) {
                 const ListTag = listType;
+                const listKey = `list-${keyCounter++}`;
                 elements.push(
-                    <ListTag key={elements.length} className="mb-4 pl-6 space-y-2">
+                    <ListTag key={listKey} className="mb-4 pl-6 space-y-2">
                         {currentList.map((item, i) => (
                             <li key={i} className="text-[var(--foreground-muted)]">{item}</li>
                         ))}
@@ -59,21 +61,21 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             }
         };
 
-        lines.forEach((line, index) => {
+        lines.forEach((line) => {
             const trimmedLine = line.trim();
 
             // Headers
             if (trimmedLine.startsWith('## ')) {
                 flushList();
                 elements.push(
-                    <h2 key={index} className="font-serif text-2xl font-bold text-[var(--foreground)] mt-8 mb-4">
+                    <h2 key={`h2-${keyCounter++}`} className="font-serif text-2xl font-bold text-[var(--foreground)] mt-8 mb-4">
                         {trimmedLine.slice(3)}
                     </h2>
                 );
             } else if (trimmedLine.startsWith('### ')) {
                 flushList();
                 elements.push(
-                    <h3 key={index} className="font-serif text-xl font-bold text-[var(--foreground)] mt-6 mb-3">
+                    <h3 key={`h3-${keyCounter++}`} className="font-serif text-xl font-bold text-[var(--foreground)] mt-6 mb-3">
                         {trimmedLine.slice(4)}
                     </h3>
                 );
@@ -107,7 +109,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
                 elements.push(
                     <p
-                        key={index}
+                        key={`p-${keyCounter++}`}
                         className="text-[var(--foreground-muted)] leading-relaxed mb-4"
                         dangerouslySetInnerHTML={{ __html: processedLine }}
                     />

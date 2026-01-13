@@ -1,11 +1,8 @@
-import { Metadata } from 'next';
+'use client';
+
+import { useSearchParams } from 'next/navigation';
 import { ProjectCard } from '@/components';
 import { projects, Project } from '@/data/projects';
-
-export const metadata: Metadata = {
-    title: 'Projects',
-    description: 'Research and engineering projects in Machine Learning, NLP, Data Analytics, and Web Development.',
-};
 
 const categories: { id: Project['category'] | 'all'; label: string }[] = [
     { id: 'all', label: 'All Projects' },
@@ -17,6 +14,13 @@ const categories: { id: Project['category'] | 'all'; label: string }[] = [
 ];
 
 export default function ProjectsPage() {
+    const searchParams = useSearchParams();
+    const selectedCategory = searchParams.get('category') || 'all';
+
+    const filteredProjects = selectedCategory === 'all'
+        ? projects
+        : projects.filter(p => p.category === selectedCategory);
+
     return (
         <div className="pt-24 pb-16">
             <div className="container-main">
@@ -31,27 +35,35 @@ export default function ProjectsPage() {
                     </p>
                 </header>
 
-                {/* Category Filter (Static for now - can be made interactive with client component) */}
+                {/* Category Filter */}
                 <div className="flex flex-wrap gap-3 mb-10">
                     {categories.map((category) => (
-                        <span
+                        <a
                             key={category.id}
-                            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors cursor-pointer ${category.id === 'all'
-                                    ? 'bg-[var(--accent)] text-white'
-                                    : 'bg-[var(--background-secondary)] text-[var(--foreground-muted)] border border-[var(--border)] hover:border-[var(--accent)] hover:text-[var(--accent)]'
+                            href={category.id === 'all' ? '/projects' : `/projects?category=${category.id}`}
+                            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors cursor-pointer ${selectedCategory === category.id
+                                ? 'bg-[var(--accent)]'
+                                : 'bg-[var(--background-secondary)] text-[var(--foreground-muted)] border border-[var(--border)] hover:border-[var(--accent)] hover:text-[var(--accent)]'
                                 }`}
+                            style={selectedCategory === category.id ? { color: 'white' } : undefined}
                         >
                             {category.label}
-                        </span>
+                        </a>
                     ))}
                 </div>
 
                 {/* Projects Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {projects.map((project) => (
+                    {filteredProjects.map((project) => (
                         <ProjectCard key={project.id} project={project} />
                     ))}
                 </div>
+
+                {filteredProjects.length === 0 && (
+                    <div className="text-center py-12">
+                        <p className="text-[var(--foreground-muted)]">No projects found in this category.</p>
+                    </div>
+                )}
 
                 {/* Summary Stats */}
                 <div className="mt-16 p-8 bg-[var(--background-secondary)] border border-[var(--border)] rounded-xl">
