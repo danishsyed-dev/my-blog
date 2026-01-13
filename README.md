@@ -2,7 +2,7 @@
 
 A professional research portfolio and technical blog built with Next.js, TypeScript, and Tailwind CSS.
 
-🔗 **Live Site**: [danishsyed.dev](https://danishsyed.dev) *(Update with your actual domain)*
+🔗 **Live Site**: [syeddanishali.me/my-blog](https://syeddanishali.me/my-blog)
 
 ## ✨ Features
 
