@@ -49,13 +49,13 @@ export const projects: Project[] = [
     title: 'RAG API with FastAPI',
     description: 'A production-ready Retrieval-Augmented Generation (RAG) system built with FastAPI, enabling intelligent document querying with contextual responses.',
     problemStatement: 'Large Language Models can hallucinate facts and lack access to domain-specific or up-to-date information. Organizations need systems that can ground LLM responses in their proprietary knowledge bases while maintaining low latency and high accuracy.',
-    methodology: 'Built a modular RAG pipeline with document ingestion, chunking strategies (semantic vs fixed-size), and vector embeddings using sentence-transformers. Implemented FAISS for efficient similarity search. Created a FastAPI backend with async processing for concurrent queries. Added re-ranking using cross-encoders for improved relevance.',
+    methodology: 'Built a modular RAG pipeline with document ingestion, chunking strategies (semantic vs fixed-size), and Created a FastAPI backend with async processing for concurrent queries. Added re-ranking using cross-encoders for improved relevance. Dockerized the application for easy deployment.',
     results: 'Reduced response latency to under 2 seconds for document retrieval + generation. Achieved 92% relevance score in user evaluations. The API handles 100+ concurrent requests with horizontal scaling support.',
-    tools: ['Python', 'FastAPI', 'LangChain', 'FAISS', 'Sentence-Transformers', 'OpenAI API', 'Docker'],
+    tools: ['Python', 'FastAPI', 'ChromaDB', 'Ollama', 'Docker'],
     githubUrl: 'https://github.com/danishsyed-dev/RAG-API',
     featured: true,
     category: 'nlp',
-    date: '2025-10'
+    date: '2026-01'
   },
   {
     id: 'laliga-analytics',
