@@ -83,6 +83,20 @@ export default function AboutPage() {
                         <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
                             LinkedIn
                         </a>
+                        <a
+                            id="cy-effective-orcid-url"
+                            href={siteConfig.social.orcid}
+                            target="_blank"
+                            rel="me noopener noreferrer"
+                            className="btn btn-secondary inline-flex items-center gap-2"
+                        >
+                            <img
+                                src="https://orcid.org/sites/default/files/images/orcid_16x16.png"
+                                style={{ width: '1em' }}
+                                alt="ORCID iD icon"
+                            />
+                            ORCID
+                        </a>
                     </div>
                 </section>
             </div>

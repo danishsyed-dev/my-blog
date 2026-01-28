@@ -81,6 +81,18 @@ export default function Footer() {
                             </li>
                             <li>
                                 <a
+                                    id="cy-effective-orcid-url"
+                                    href={siteConfig.social.orcid}
+                                    target="_blank"
+                                    rel="me noopener noreferrer"
+                                    className="text-sm text-[var(--foreground-muted)] hover:text-[var(--accent)] transition-colors inline-flex items-center gap-2"
+                                >
+                                    <OrcidIcon className="w-4 h-4" />
+                                    ORCID
+                                </a>
+                            </li>
+                            <li>
+                                <a
                                     href={`mailto:${siteConfig.social.email}`}
                                     className="text-sm text-[var(--foreground-muted)] hover:text-[var(--accent)] transition-colors inline-flex items-center gap-2"
                                 >
@@ -132,6 +144,14 @@ function EmailIcon({ className }: { className?: string }) {
     return (
         <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+    );
+}
+
+function OrcidIcon({ className }: { className?: string }) {
+    return (
+        <svg className={className} viewBox="0 0 256 256" fill="currentColor">
+            <path d="M128 0C57.3 0 0 57.3 0 128s57.3 128 128 128 128-57.3 128-128S198.7 0 128 0zM86.3 186.2H70.9V79.5h15.4v106.7zm-7.7-121c-5.4 0-9.3-4.2-9.3-9.1 0-5 3.9-9.1 9.3-9.1s9.1 4.1 9.1 9.1c0 4.9-3.7 9.1-9.1 9.1zm92.4 121h-15.4v-54.8c0-14.2-5.1-24-17.8-24-9.7 0-15.5 6.5-18 12.8-.9 2.3-1.2 5.5-1.2 8.7v57.3H104V79.5h15.4v14.7h.2c2.2-3.3 6.2-12.1 22.4-12.1 16.4 0 28.7 10.7 28.7 33.7v70.4z" />
         </svg>
     );
 }

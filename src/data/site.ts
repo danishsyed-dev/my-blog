@@ -21,6 +21,7 @@ export const siteConfig = {
         github: 'https://github.com/danishsyed-dev',
         linkedin: 'https://www.linkedin.com/in/syed-danish-ali-70b36334a/',
         scholar: 'https://scholar.google.com/citations?user=Xt1MelQAAAAJ&hl=en',
+        orcid: 'https://orcid.org/0009-0000-3010-0027',
         email: 'contact@danishsyed.dev',
     },
 
