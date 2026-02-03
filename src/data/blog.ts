@@ -11,6 +11,109 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
     {
+        id: 'food-extractor',
+        title: 'Food Extractor: Fine-Tuning Gemma 3 270M for Structured Data Extraction',
+        excerpt: 'A hands-on tutorial on fully fine-tuning Google\'s Gemma 3 270M model using Hugging Face libraries to extract food and drink items from text with structured output.',
+        content: `
+## Introduction
+
+Ever wanted to extract structured food data from messy text? In this tutorial, I walk through how I fully fine-tuned Google's Gemma 3 270M model to do exactly that — turning unstructured descriptions into clean, parseable output.
+
+## Why Fine-Tune a Small Language Model?
+
+Before diving in, here's why SLMs (Small Language Models) are powerful:
+
+- Own the model          - Run anywhere without API costs
+- Simple tasks work well - Smaller models excel at focused tasks
+- No API calls needed    - Run completely offline
+- Batch processing       - Much faster than sequential API calls
+- Task-specific          - Better performance on your use case
+
+## What We're Building
+
+A model that extracts food and drink items from text, returning structured output.
+
+Input:
+\`\`\`
+A plate of rice cakes, salmon, cottage cheese and small cherry tomatoes with a cup of tea.
+\`\`\`
+
+Output:
+\`\`\`
+food_or_drink: 1
+tags: fi
+foods: rice cakes, salmon, cottage cheese, cherry tomatoes
+drinks: cup of tea
+\`\`\`
+
+## The Tech Stack
+
+The project uses the following technologies:
+
+- Model: Gemma 3 270M
+- Dataset: FoodExtract-1k
+- Training: TRL (Transformers Reinforcement Learning)
+- Inference: Transformers + Accelerate
+- Demo: Gradio
+
+## Training Process
+
+The fine-tuning process is straightforward with Hugging Face's TRL library:
+
+1. Load the base Gemma 3 270M model
+2. Prepare the FoodExtract-1k dataset with proper formatting
+3. Configure the SFTTrainer with appropriate hyperparameters
+4. Train for 3 epochs (~18 minutes on T4 GPU)
+
+## Training Results
+
+After 3 epochs of supervised fine-tuning:
+
+- Epoch 1: Training Loss 2.17, Validation Loss 2.24, Token Accuracy 58.8%
+- Epoch 2: Training Loss 1.25, Validation Loss 2.28, Token Accuracy 58.9%
+- Epoch 3: Training Loss 1.07, Validation Loss 2.46, Token Accuracy 58.6%
+
+## Key Concepts
+
+### Full Fine-Tuning vs LoRA
+
+- Full Fine-Tuning - All model weights are updated (used in this project)
+- LoRA             - Only adapter weights are trained (requires fewer resources)
+
+For a small model like Gemma 3 270M, full fine-tuning is practical and yields excellent results.
+
+### Tags Dictionary
+
+The model learns to classify content with these tags:
+
+- np - Nutrition Panel
+- il - Ingredient List
+- me - Menu
+- re - Recipe
+- fi - Food Items
+- di - Drink Items
+- fa - Food Advertisement
+- fp - Food Packaging
+
+## Lessons Learned
+
+1. Think in tokens         - Frame every problem as: "What tokens in, what tokens out?"
+2. Small models are powerful - 270M parameters is enough for structured extraction
+3. Data quality matters     - The FoodExtract-1k dataset's formatting directly impacts output structure
+4. Google Colab works       - A free T4 GPU can fine-tune this in under 20 minutes
+
+## Conclusion
+
+Fine-tuning small language models democratizes AI customization. You can create task-specific models that run locally, work offline, and perform better than general-purpose APIs on your specific use case. The Food Extractor demonstrates how approachable this process has become with modern tooling.
+
+Check out the full notebook on Google Colab to try it yourself!
+        `.trim(),
+        tags: ['LLMs', 'Fine-Tuning', 'Hugging Face', 'Gemma', 'NLP', 'Python', 'Deep Learning'],
+        date: '2026-02-03',
+        readTime: '12 min read',
+        featured: true
+    },
+    {
         id: 'building-rag-system-fastapi',
         title: 'How I Built a RAG System with FastAPI',
         excerpt: 'A deep dive into building a production-ready Retrieval-Augmented Generation system, covering architecture decisions, chunking strategies, and performance optimization.',

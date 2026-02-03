@@ -1,7 +1,6 @@
 'use client';
 
-import { Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { Suspense, useEffect, useState } from 'react';
 import { ProjectCard } from '@/components';
 import { projects, Project } from '@/data/projects';
 
@@ -15,8 +14,38 @@ const categories: { id: Project['category'] | 'all'; label: string }[] = [
 ];
 
 function ProjectsContent() {
-    const searchParams = useSearchParams();
-    const selectedCategory = searchParams.get('category') || 'all';
+    const [selectedCategory, setSelectedCategory] = useState<string>('all');
+
+    useEffect(() => {
+        // Read initial category from hash
+        const hash = window.location.hash.replace('#category-', '');
+        if (hash && categories.some(c => c.id === hash)) {
+            setSelectedCategory(hash);
+        }
+
+        // Listen for hash changes
+        const handleHashChange = () => {
+            const newHash = window.location.hash.replace('#category-', '');
+            if (newHash && categories.some(c => c.id === newHash)) {
+                setSelectedCategory(newHash);
+            } else if (!window.location.hash) {
+                setSelectedCategory('all');
+            }
+        };
+
+        window.addEventListener('hashchange', handleHashChange);
+        return () => window.removeEventListener('hashchange', handleHashChange);
+    }, []);
+
+    const handleCategoryClick = (categoryId: string) => {
+        setSelectedCategory(categoryId);
+        if (categoryId === 'all') {
+            // Remove hash for 'all'
+            history.pushState(null, '', window.location.pathname);
+        } else {
+            window.location.hash = `category-${categoryId}`;
+        }
+    };
 
     const filteredProjects = selectedCategory === 'all'
         ? projects
@@ -27,9 +56,9 @@ function ProjectsContent() {
             {/* Category Filter */}
             <div className="flex flex-wrap gap-3 mb-10">
                 {categories.map((category) => (
-                    <a
+                    <button
                         key={category.id}
-                        href={category.id === 'all' ? '/projects' : `/projects?category=${category.id}`}
+                        onClick={() => handleCategoryClick(category.id)}
                         className={`px-4 py-2 rounded-full text-sm font-medium transition-colors cursor-pointer ${selectedCategory === category.id
                             ? 'bg-[var(--accent)]'
                             : 'bg-[var(--background-secondary)] text-[var(--foreground-muted)] border border-[var(--border)] hover:border-[var(--accent)] hover:text-[var(--accent)]'
@@ -37,7 +66,7 @@ function ProjectsContent() {
                         style={selectedCategory === category.id ? { color: 'white' } : undefined}
                     >
                         {category.label}
-                    </a>
+                    </button>
                 ))}
             </div>
 

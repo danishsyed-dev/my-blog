@@ -65,8 +65,8 @@ I develop end-to-end solutions from data preprocessing and modeling to evaluatio
 
     // Resume
     resume: {
-        downloadUrl: '/resume.pdf', // Add your resume PDF to public folder
-        lastUpdated: 'January 2026',
+        downloadUrl: '/Syed-Danish-Ali.Resume.pdf', // Resume PDF in public folder
+        lastUpdated: 'February 2026',
     },
 
     // SEO Keywords
