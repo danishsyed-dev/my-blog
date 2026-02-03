@@ -34,7 +34,7 @@ export default function ResumePage() {
                             </div>
                             <div className="flex flex-wrap gap-3">
                                 <a
-                                    href={siteConfig.resume.downloadUrl}
+                                    href={`${siteConfig.basePath}${siteConfig.resume.downloadUrl}`}
                                     download
                                     className="btn btn-primary"
                                 >

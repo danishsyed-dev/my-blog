@@ -1,4 +1,8 @@
+// Base path for production deployment (GitHub Pages)
+const basePath = process.env.NODE_ENV === 'production' ? '/my-blog' : '';
+
 export const siteConfig = {
+    basePath,
     name: 'SYED DANISH ALI',
     title: 'SYED DANISH ALI | AI & ML Engineer',
     description: 'AI & Machine Learning engineer focused on building data-driven systems, intelligent models, and applied research solutions.',
