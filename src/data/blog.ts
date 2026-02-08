@@ -11,6 +11,48 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
     {
+        id: 'Dynamic Pricing ML System',
+        title: 'How I Built a Dynamic Pricing ML System',
+        excerpt: 'A deep dive into building a production-ready system for dynamic pricing using machine learning.',
+        content: `
+## Introduction
+A Dynamic Pricing ML System that predicts optimal prices for retail products to maximize sales revenue. Built with LightGBM, Flask, and a beautiful web UI.
+
+🎯 What Does This Project Do?
+Given a product (identified by stockcode), this system predicts:
+
+How many units will sell at different price points
+What is the optimal price to maximize total revenue
+Business Question
+"If I price product X at $Y, how many will I sell and what's my revenue?"
+
+✨ Key Features
+Feature	Description
+🤖 ML Models	LightGBM + ElasticNet ensemble for robust predictions
+🌐 REST API	Flask-based API with CORS support
+🎨 Web UI	Beautiful, responsive prediction interface
+📊 Visualizations	Interactive charts showing price vs. sales curves
+🚀 Production Ready	Docker support for AWS Lambda/SageMaker deployment
+⚡ Fast Inference	~1-2 seconds per prediction
+🏗️ System Architecture
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│   Raw Data      │────→│  Data Pipeline  │────→│  Processed Data │
+│  (CSV/Excel)    │     │  (Engineering)  │     │   (Parquet)     │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+                                                        │
+                                                        ↓
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│   Predictions   │←────│   Flask API     │←────│  ML Models      │
+│   (JSON/UI)     │     │   (Waitress)    │     │  (LightGBM)     │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+
+        `.trim(),
+        tags: ['Machine Learning', 'Dynamic Pricing', 'NLP', 'LLMs', 'Python'],
+        date: '2025-10-15',
+        readTime: '8 min read',
+        featured: true
+    },
+    {
         id: 'food-extractor',
         title: 'Food Extractor: Fine-Tuning Gemma 3 270M for Structured Data Extraction',
         excerpt: 'A hands-on tutorial on fully fine-tuning Google\'s Gemma 3 270M model using Hugging Face libraries to extract food and drink items from text with structured output.',
