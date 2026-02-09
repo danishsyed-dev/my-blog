@@ -11,7 +11,7 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
     {
-        id: 'Dynamic Pricing ML System',
+        id: 'dynamic-pricing-ml-system',
         title: 'How I Built a Dynamic Pricing ML System',
         excerpt: 'A deep dive into building a production-ready system for dynamic pricing using machine learning.',
         content: `
