@@ -53,6 +53,85 @@ Feature	Description
         featured: true
     },
     {
+        id: 'relaycontext-a-cli-tool-for-ai-coding-context-persistence',
+        title: 'RelayContext: A CLI Tool for AI Coding Context Persistence',
+        excerpt: 'A practical guide to building RelayContext, a Node.js CLI tool that captures and persists structured AI coding context — reasoning, decisions, and task state — alongside Git branches.',
+        content: `
+Introduction
+
+RelayContext is a Node.js-based CLI tool that captures and persists structured AI coding context — reasoning, decisions, and task state — alongside Git branches. It enables seamless continuation of AI-assisted development across sessions, IDEs, and devices without re-explaining project architecture or progress.
+
+The Problem
+
+When working with AI coding assistants, context is everything. Every time you start a new session, you lose:
+
+- The reasoning behind architectural decisions
+- The current state of your task
+- What approaches were tried and why they failed
+- Project-specific conventions the AI had learned
+
+This leads to repetitive re-explaining and inconsistent AI assistance across sessions.
+
+The Solution
+
+RelayContext solves this by providing a simple CLI that:
+
+1. Captures context — Saves structured snapshots of AI coding sessions
+2. Persists alongside Git — Context travels with your branches
+3. Enables seamless resumption — Pick up exactly where you left off
+4. Works across tools — IDE and device agnostic
+
+Key Features
+
+- Branch-aware storage — Context is linked to Git branches automatically
+- Structured format — Reasoning, decisions, and state stored in clean JSON
+- CLI-first design — Fast, scriptable, and easy to integrate into workflows
+- Diff support — Compare context snapshots across sessions
+- Handoff & sharing — Generate shareable context summaries for team collaboration
+
+Commands Overview
+
+RelayContext provides 7 core commands:
+
+\`\`\`bash
+$ relay init      # Initialize context tracking in a repository
+$ relay save      # Capture and save current AI context
+$ relay resume    # Restore context for the current branch
+$ relay log       # View context history
+$ relay diff      # Compare context between snapshots
+$ relay handoff   # Generate handoff summaries
+$ relay share     # Export context for sharing
+\`\`\`
+
+Technical Stack
+
+The project is built with:
+
+- Runtime: Node.js
+- Language: TypeScript
+- Distribution: NPM package (global CLI)
+- Storage: JSON-based local persistence
+- Integration: Git CLI for branch detection
+
+Lessons Learned
+
+1. CLI UX matters — Interactive prompts make saving context frictionless
+2. Git integration is powerful — Leveraging branches for context scoping feels natural
+3. JSON is sufficient — No need for a database when context is project-scoped
+4. Developer productivity tools need to be fast — Every millisecond counts in CLI tools
+
+Conclusion
+
+RelayContext bridges the gap between ephemeral AI sessions and persistent development workflows. By capturing and organizing AI coding context alongside your Git branches, it eliminates the friction of context-switching and enables truly continuous AI-assisted development.
+
+Check out the project on GitHub to get started!
+        `.trim(),
+        tags: ['Node.js', 'CLI Development', 'Git Integration', 'Developer Productivity'],
+        date: '2026-02-22',
+        readTime: '8 min read',
+        featured: true
+    },
+    {
         id: 'food-extractor',
         title: 'Food Extractor: Fine-Tuning Gemma 3 270M for Structured Data Extraction',
         excerpt: 'A hands-on tutorial on fully fine-tuning Google\'s Gemma 3 270M model using Hugging Face libraries to extract food and drink items from text with structured output.',
