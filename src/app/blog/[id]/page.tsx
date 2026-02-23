@@ -37,7 +37,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         notFound();
     }
 
-    // Simple markdown-like rendering
+    // Process inline formatting (bold, italic, inline code)
+    const processInline = (text: string): string => {
+        return text
+            .replace(/\*\*(.*?)\*\*/g, '<strong class="text-[var(--foreground)]">$1</strong>')
+            .replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g, '<em>$1</em>')
+            .replace(/`(.*?)`/g, '<code class="inline-code">$1</code>')
+            .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" class="rounded-lg my-6 w-full" />')
+            .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-[var(--accent)] hover:text-[var(--accent-hover)] underline underline-offset-2">$1</a>');
+    };
+
+    // Full markdown-like rendering
     const renderContent = (content: string) => {
         const lines = content.split('\n');
         const elements: React.ReactNode[] = [];
@@ -45,14 +55,27 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         let listType: 'ul' | 'ol' | null = null;
         let keyCounter = 0;
 
+        // Code block state
+        let inCodeBlock = false;
+        let codeBlockLang = '';
+        let codeBlockLines: string[] = [];
+
+        // Table state
+        let tableRows: string[][] = [];
+        let inTable = false;
+
         const flushList = () => {
             if (currentList.length > 0 && listType) {
                 const ListTag = listType;
                 const listKey = `list-${keyCounter++}`;
                 elements.push(
-                    <ListTag key={listKey} className="mb-4 pl-6 space-y-2">
+                    <ListTag key={listKey} className={`mb-4 pl-6 space-y-2 ${listType === 'ol' ? 'list-decimal' : 'list-disc'}`}>
                         {currentList.map((item, i) => (
-                            <li key={i} className="text-[var(--foreground-muted)]">{item}</li>
+                            <li
+                                key={i}
+                                className="text-[var(--foreground-muted)]"
+                                dangerouslySetInnerHTML={{ __html: processInline(item) }}
+                            />
                         ))}
                     </ListTag>
                 );
@@ -61,10 +84,120 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             }
         };
 
+        const flushTable = () => {
+            if (tableRows.length > 0) {
+                const headerRow = tableRows[0];
+                const bodyRows = tableRows.slice(1);
+                elements.push(
+                    <div key={`table-${keyCounter++}`} className="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    {headerRow.map((cell, i) => (
+                                        <th key={i} dangerouslySetInnerHTML={{ __html: processInline(cell.trim()) }} />
+                                    ))}
+                                </tr>
+                            </thead>
+                            {bodyRows.length > 0 && (
+                                <tbody>
+                                    {bodyRows.map((row, ri) => (
+                                        <tr key={ri}>
+                                            {row.map((cell, ci) => (
+                                                <td key={ci} dangerouslySetInnerHTML={{ __html: processInline(cell.trim()) }} />
+                                            ))}
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            )}
+                        </table>
+                    </div>
+                );
+                tableRows = [];
+                inTable = false;
+            }
+        };
+
+        const flushCodeBlock = () => {
+            if (codeBlockLines.length > 0 || codeBlockLang) {
+                elements.push(
+                    <div key={`code-${keyCounter++}`} className="code-block">
+                        {codeBlockLang && (
+                            <div className="code-block-header">
+                                {codeBlockLang}
+                            </div>
+                        )}
+                        <pre>
+                            <code>{codeBlockLines.join('\n')}</code>
+                        </pre>
+                    </div>
+                );
+                codeBlockLines = [];
+                codeBlockLang = '';
+            }
+        };
+
         lines.forEach((line) => {
             const trimmedLine = line.trim();
 
-            // Headers
+            // --- Code block handling ---
+            if (trimmedLine.startsWith('```') || trimmedLine.startsWith('\\`\\`\\`')) {
+                const cleanLine = trimmedLine.replace(/\\`/g, '`');
+                if (!inCodeBlock) {
+                    // Opening fence
+                    flushList();
+                    flushTable();
+                    inCodeBlock = true;
+                    const lang = cleanLine.slice(3).trim();
+                    codeBlockLang = lang || '';
+                    codeBlockLines = [];
+                } else {
+                    // Closing fence
+                    inCodeBlock = false;
+                    flushCodeBlock();
+                }
+                return;
+            }
+
+            if (inCodeBlock) {
+                // Unescape backtick sequences inside code blocks
+                codeBlockLines.push(line.replace(/\\`/g, '`'));
+                return;
+            }
+
+            // --- Table handling ---
+            if (trimmedLine.includes('\t') && !trimmedLine.startsWith('#')) {
+                // Tab-separated table row (used in Dynamic Pricing post)
+                flushList();
+                if (!inTable) {
+                    inTable = true;
+                    tableRows = [];
+                }
+                tableRows.push(trimmedLine.split('\t'));
+                return;
+            }
+
+            if (trimmedLine.startsWith('|') && trimmedLine.endsWith('|')) {
+                // Pipe-delimited table row
+                flushList();
+                // Skip separator rows like |---|---|
+                if (/^\|[\s\-:|]+\|$/.test(trimmedLine)) {
+                    return;
+                }
+                if (!inTable) {
+                    inTable = true;
+                    tableRows = [];
+                }
+                const cells = trimmedLine.slice(1, -1).split('|');
+                tableRows.push(cells);
+                return;
+            }
+
+            // If we were in a table and hit a non-table line, flush
+            if (inTable) {
+                flushTable();
+            }
+
+            // --- Headers ---
             if (trimmedLine.startsWith('## ')) {
                 flushList();
                 elements.push(
@@ -80,7 +213,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     </h3>
                 );
             }
-            // List items
+            // --- Horizontal rule ---
+            else if (/^[-*_]{3,}$/.test(trimmedLine)) {
+                flushList();
+                elements.push(
+                    <hr key={`hr-${keyCounter++}`} className="my-8 border-t border-[var(--border)]" />
+                );
+            }
+            // --- List items ---
             else if (trimmedLine.startsWith('- ') || trimmedLine.startsWith('* ')) {
                 if (listType !== 'ul') {
                     flushList();
@@ -95,29 +235,39 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 }
                 currentList.push(trimmedLine.replace(/^\d+\. /, ''));
             }
-            // Code blocks
-            else if (trimmedLine.startsWith('```')) {
+            // --- Image (standalone line) ---
+            else if (/^!\[([^\]]*)\]\(([^)]+)\)$/.test(trimmedLine)) {
                 flushList();
-                // Skip code block markers for now
+                const match = trimmedLine.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+                if (match) {
+                    elements.push(
+                        <figure key={`img-${keyCounter++}`} className="my-8">
+                            <img src={match[2]} alt={match[1]} className="rounded-lg w-full" />
+                            {match[1] && (
+                                <figcaption className="text-center text-sm text-[var(--foreground-subtle)] mt-3">
+                                    {match[1]}
+                                </figcaption>
+                            )}
+                        </figure>
+                    );
+                }
             }
-            // Bold text in paragraphs
+            // --- Paragraphs ---
             else if (trimmedLine.length > 0) {
                 flushList();
-                const processedLine = trimmedLine
-                    .replace(/\*\*(.*?)\*\*/g, '<strong class="text-[var(--foreground)]">$1</strong>')
-                    .replace(/`(.*?)`/g, '<code class="px-1.5 py-0.5 bg-[var(--background-tertiary)] text-[var(--accent)] rounded text-sm">$1</code>');
-
                 elements.push(
                     <p
                         key={`p-${keyCounter++}`}
                         className="text-[var(--foreground-muted)] leading-relaxed mb-4"
-                        dangerouslySetInnerHTML={{ __html: processedLine }}
+                        dangerouslySetInnerHTML={{ __html: processInline(trimmedLine) }}
                     />
                 );
             }
         });
 
         flushList();
+        flushTable();
+        if (inCodeBlock) flushCodeBlock();
         return elements;
     };
 
@@ -135,6 +285,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     Back to Blog
                 </Link>
 
+                {/* Cover Image */}
+                {post.coverImage && (
+                    <div className="mb-8 rounded-xl overflow-hidden border border-[var(--border)]">
+                        <img
+                            src={post.coverImage}
+                            alt={post.title}
+                            className="w-full h-auto object-cover"
+                        />
+                    </div>
+                )}
+
                 {/* Header */}
                 <header className="mb-12">
                     <div className="flex items-center gap-4 mb-4 text-sm text-[var(--foreground-subtle)]">
@@ -151,7 +312,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     <h1 className="font-serif text-3xl md:text-4xl font-bold text-[var(--foreground)] mb-6">
                         {post.title}
                     </h1>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 mb-6">
                         {post.tags.map((tag) => (
                             <Link
                                 key={tag}
@@ -162,6 +323,38 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                             </Link>
                         ))}
                     </div>
+
+                    {/* Action Buttons */}
+                    {(post.githubUrl || post.liveUrl) && (
+                        <div className="flex flex-wrap gap-3 pt-4 border-t border-[var(--border)]">
+                            {post.githubUrl && (
+                                <a
+                                    href={post.githubUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="btn btn-primary"
+                                >
+                                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+                                    </svg>
+                                    View on GitHub
+                                </a>
+                            )}
+                            {post.liveUrl && (
+                                <a
+                                    href={post.liveUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="btn btn-secondary text-sm"
+                                >
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                    </svg>
+                                    Live Demo
+                                </a>
+                            )}
+                        </div>
+                    )}
                 </header>
 
                 {/* Content */}

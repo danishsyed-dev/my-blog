@@ -7,61 +7,22 @@ export interface BlogPost {
     date: string;
     readTime: string;
     featured: boolean;
+    coverImage?: string;
+    githubUrl?: string;
+    liveUrl?: string;
 }
 
 export const blogPosts: BlogPost[] = [
-    {
-        id: 'dynamic-pricing-ml-system',
-        title: 'How I Built a Dynamic Pricing ML System',
-        excerpt: 'A deep dive into building a production-ready system for dynamic pricing using machine learning.',
-        content: `
-## Introduction
-A Dynamic Pricing ML System that predicts optimal prices for retail products to maximize sales revenue. Built with LightGBM, Flask, and a beautiful web UI.
-
-🎯 What Does This Project Do?
-Given a product (identified by stockcode), this system predicts:
-
-How many units will sell at different price points
-What is the optimal price to maximize total revenue
-Business Question
-"If I price product X at $Y, how many will I sell and what's my revenue?"
-
-✨ Key Features
-Feature	Description
-🤖 ML Models	LightGBM + ElasticNet ensemble for robust predictions
-🌐 REST API	Flask-based API with CORS support
-🎨 Web UI	Beautiful, responsive prediction interface
-📊 Visualizations	Interactive charts showing price vs. sales curves
-🚀 Production Ready	Docker support for AWS Lambda/SageMaker deployment
-⚡ Fast Inference	~1-2 seconds per prediction
-🏗️ System Architecture
-┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
-│   Raw Data      │────→│  Data Pipeline  │────→│  Processed Data │
-│  (CSV/Excel)    │     │  (Engineering)  │     │   (Parquet)     │
-└─────────────────┘     └─────────────────┘     └─────────────────┘
-                                                        │
-                                                        ↓
-┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
-│   Predictions   │←────│   Flask API     │←────│  ML Models      │
-│   (JSON/UI)     │     │   (Waitress)    │     │  (LightGBM)     │
-└─────────────────┘     └─────────────────┘     └─────────────────┘
-
-        `.trim(),
-        tags: ['Machine Learning', 'Dynamic Pricing', 'NLP', 'LLMs', 'Python'],
-        date: '2025-10-15',
-        readTime: '8 min read',
-        featured: true
-    },
     {
         id: 'relaycontext-a-cli-tool-for-ai-coding-context-persistence',
         title: 'RelayContext: A CLI Tool for AI Coding Context Persistence',
         excerpt: 'A practical guide to building RelayContext, a Node.js CLI tool that captures and persists structured AI coding context — reasoning, decisions, and task state — alongside Git branches.',
         content: `
-Introduction
+## Introduction
 
 RelayContext is a Node.js-based CLI tool that captures and persists structured AI coding context — reasoning, decisions, and task state — alongside Git branches. It enables seamless continuation of AI-assisted development across sessions, IDEs, and devices without re-explaining project architecture or progress.
 
-The Problem
+## The Problem
 
 When working with AI coding assistants, context is everything. Every time you start a new session, you lose:
 
@@ -72,24 +33,24 @@ When working with AI coding assistants, context is everything. Every time you st
 
 This leads to repetitive re-explaining and inconsistent AI assistance across sessions.
 
-The Solution
+## The Solution
 
 RelayContext solves this by providing a simple CLI that:
 
-1. Captures context — Saves structured snapshots of AI coding sessions
-2. Persists alongside Git — Context travels with your branches
-3. Enables seamless resumption — Pick up exactly where you left off
-4. Works across tools — IDE and device agnostic
+1. **Captures context** — Saves structured snapshots of AI coding sessions
+2. **Persists alongside Git** — Context travels with your branches
+3. **Enables seamless resumption** — Pick up exactly where you left off
+4. **Works across tools** — IDE and device agnostic
 
-Key Features
+## Key Features
 
-- Branch-aware storage — Context is linked to Git branches automatically
-- Structured format — Reasoning, decisions, and state stored in clean JSON
-- CLI-first design — Fast, scriptable, and easy to integrate into workflows
-- Diff support — Compare context snapshots across sessions
-- Handoff & sharing — Generate shareable context summaries for team collaboration
+- **Branch-aware storage** — Context is linked to Git branches automatically
+- **Structured format** — Reasoning, decisions, and state stored in clean JSON
+- **CLI-first design** — Fast, scriptable, and easy to integrate into workflows
+- **Diff support** — Compare context snapshots across sessions
+- **Handoff & sharing** — Generate shareable context summaries for team collaboration
 
-Commands Overview
+## Commands Overview
 
 RelayContext provides 7 core commands:
 
@@ -103,33 +64,130 @@ $ relay handoff   # Generate handoff summaries
 $ relay share     # Export context for sharing
 \`\`\`
 
-Technical Stack
+## Installation
+
+\`\`\`bash
+# Install globally from npm
+npm install -g relaycontext
+
+# Initialize in your project
+cd your-project
+relay init
+\`\`\`
+
+## Usage Example
+
+\`\`\`bash
+# Save context after a productive AI session
+$ relay save
+? What task were you working on? Implementing auth middleware
+? Key decisions made? JWT with refresh tokens, httpOnly cookies
+? Current status? Auth routes done, need to add RBAC
+
+✓ Context saved to .relay/contexts/feature-auth/ctx_1708523400.json
+
+# Later, resume where you left off
+$ relay resume
+Branch: feature/auth
+Last session: 2 hours ago
+Task: Implementing auth middleware
+Status: Auth routes done, need to add RBAC
+Decisions: JWT with refresh tokens, httpOnly cookies
+\`\`\`
+
+## Technical Stack
 
 The project is built with:
 
-- Runtime: Node.js
-- Language: TypeScript
-- Distribution: NPM package (global CLI)
-- Storage: JSON-based local persistence
-- Integration: Git CLI for branch detection
+- **Runtime:** Node.js
+- **Language:** TypeScript
+- **Distribution:** NPM package (global CLI)
+- **Storage:** JSON-based local persistence
+- **Integration:** Git CLI for branch detection
 
-Lessons Learned
+## Lessons Learned
 
-1. CLI UX matters — Interactive prompts make saving context frictionless
-2. Git integration is powerful — Leveraging branches for context scoping feels natural
-3. JSON is sufficient — No need for a database when context is project-scoped
-4. Developer productivity tools need to be fast — Every millisecond counts in CLI tools
+1. **CLI UX matters** — Interactive prompts make saving context frictionless
+2. **Git integration is powerful** — Leveraging branches for context scoping feels natural
+3. **JSON is sufficient** — No need for a database when context is project-scoped
+4. **Developer productivity tools need to be fast** — Every millisecond counts in CLI tools
 
-Conclusion
+## Conclusion
 
 RelayContext bridges the gap between ephemeral AI sessions and persistent development workflows. By capturing and organizing AI coding context alongside your Git branches, it eliminates the friction of context-switching and enables truly continuous AI-assisted development.
 
-Check out the project on GitHub to get started!
+Check out the [project on GitHub](https://github.com/danishsyed-dev/RelayContext) to get started!
         `.trim(),
         tags: ['Node.js', 'CLI Development', 'Git Integration', 'Developer Productivity'],
         date: '2026-02-22',
         readTime: '8 min read',
-        featured: true
+        featured: true,
+        githubUrl: 'https://github.com/danishsyed-dev/RelayContext',
+    },
+    {
+        id: 'dynamic-pricing-ml-system',
+        title: 'How I Built a Dynamic Pricing ML System',
+        excerpt: 'A deep dive into building a production-ready system for dynamic pricing using machine learning.',
+        content: `
+## Introduction
+A Dynamic Pricing ML System that predicts optimal prices for retail products to maximize sales revenue. Built with LightGBM, Flask, and a beautiful web UI.
+
+## 🎯 What Does This Project Do?
+Given a product (identified by stockcode), this system predicts:
+
+- How many units will sell at different price points
+- What is the optimal price to maximize total revenue
+
+**Business Question:**
+"If I price product X at $Y, how many will I sell and what's my revenue?"
+
+## ✨ Key Features
+
+| Feature | Description |
+|---------|-------------|
+| 🤖 ML Models | LightGBM + ElasticNet ensemble for robust predictions |
+| 🌐 REST API | Flask-based API with CORS support |
+| 🎨 Web UI | Beautiful, responsive prediction interface |
+| 📊 Visualizations | Interactive charts showing price vs. sales curves |
+| 🚀 Production Ready | Docker support for AWS Lambda/SageMaker deployment |
+| ⚡ Fast Inference | ~1-2 seconds per prediction |
+
+## 🏗️ System Architecture
+
+\`\`\`
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│   Raw Data      │────→│  Data Pipeline  │────→│  Processed Data │
+│  (CSV/Excel)    │     │  (Engineering)  │     │   (Parquet)     │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+                                                        │
+                                                        ↓
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│   Predictions   │←────│   Flask API     │←────│  ML Models      │
+│   (JSON/UI)     │     │   (Waitress)    │     │  (LightGBM)     │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+\`\`\`
+
+## Quick Start
+
+\`\`\`bash
+# Clone the repository
+git clone https://github.com/danishsyed-dev/ml-sales-prediction.git
+cd ml-sales-prediction
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the application
+python application.py
+\`\`\`
+
+The web UI will be available at \`http://localhost:5000\`.
+        `.trim(),
+        tags: ['Machine Learning', 'Dynamic Pricing', 'Flask', 'LightGBM', 'Python'],
+        date: '2025-10-15',
+        readTime: '8 min read',
+        featured: true,
+        githubUrl: 'https://github.com/danishsyed-dev/ml-sales-prediction',
     },
     {
         id: 'food-extractor',
@@ -144,22 +202,22 @@ Ever wanted to extract structured food data from messy text? In this tutorial, I
 
 Before diving in, here's why SLMs (Small Language Models) are powerful:
 
-- Own the model          - Run anywhere without API costs
-- Simple tasks work well - Smaller models excel at focused tasks
-- No API calls needed    - Run completely offline
-- Batch processing       - Much faster than sequential API calls
-- Task-specific          - Better performance on your use case
+- **Own the model** — Run anywhere without API costs
+- **Simple tasks work well** — Smaller models excel at focused tasks
+- **No API calls needed** — Run completely offline
+- **Batch processing** — Much faster than sequential API calls
+- **Task-specific** — Better performance on your use case
 
 ## What We're Building
 
 A model that extracts food and drink items from text, returning structured output.
 
-Input:
+**Input:**
 \`\`\`
 A plate of rice cakes, salmon, cottage cheese and small cherry tomatoes with a cup of tea.
 \`\`\`
 
-Output:
+**Output:**
 \`\`\`
 food_or_drink: 1
 tags: fi
@@ -169,13 +227,13 @@ drinks: cup of tea
 
 ## The Tech Stack
 
-The project uses the following technologies:
-
-- Model: Gemma 3 270M
-- Dataset: FoodExtract-1k
-- Training: TRL (Transformers Reinforcement Learning)
-- Inference: Transformers + Accelerate
-- Demo: Gradio
+| Component | Tool |
+|-----------|------|
+| Model | Gemma 3 270M |
+| Dataset | FoodExtract-1k |
+| Training | TRL (Transformers Reinforcement Learning) |
+| Inference | Transformers + Accelerate |
+| Demo | Gradio |
 
 ## Training Process
 
@@ -186,20 +244,40 @@ The fine-tuning process is straightforward with Hugging Face's TRL library:
 3. Configure the SFTTrainer with appropriate hyperparameters
 4. Train for 3 epochs (~18 minutes on T4 GPU)
 
+\`\`\`python
+from trl import SFTTrainer, SFTConfig
+
+trainer = SFTTrainer(
+    model=model,
+    args=SFTConfig(
+        output_dir="./food-extractor",
+        num_train_epochs=3,
+        per_device_train_batch_size=2,
+        learning_rate=2e-5,
+    ),
+    train_dataset=dataset["train"],
+    eval_dataset=dataset["test"],
+)
+
+trainer.train()
+\`\`\`
+
 ## Training Results
 
 After 3 epochs of supervised fine-tuning:
 
-- Epoch 1: Training Loss 2.17, Validation Loss 2.24, Token Accuracy 58.8%
-- Epoch 2: Training Loss 1.25, Validation Loss 2.28, Token Accuracy 58.9%
-- Epoch 3: Training Loss 1.07, Validation Loss 2.46, Token Accuracy 58.6%
+| Epoch | Training Loss | Validation Loss | Token Accuracy |
+|-------|--------------|-----------------|----------------|
+| 1 | 2.17 | 2.24 | 58.8% |
+| 2 | 1.25 | 2.28 | 58.9% |
+| 3 | 1.07 | 2.46 | 58.6% |
 
 ## Key Concepts
 
 ### Full Fine-Tuning vs LoRA
 
-- Full Fine-Tuning - All model weights are updated (used in this project)
-- LoRA             - Only adapter weights are trained (requires fewer resources)
+- **Full Fine-Tuning** — All model weights are updated (used in this project)
+- **LoRA** — Only adapter weights are trained (requires fewer resources)
 
 For a small model like Gemma 3 270M, full fine-tuning is practical and yields excellent results.
 
@@ -207,32 +285,35 @@ For a small model like Gemma 3 270M, full fine-tuning is practical and yields ex
 
 The model learns to classify content with these tags:
 
-- np - Nutrition Panel
-- il - Ingredient List
-- me - Menu
-- re - Recipe
-- fi - Food Items
-- di - Drink Items
-- fa - Food Advertisement
-- fp - Food Packaging
+| Abbreviation | Meaning |
+|-------------|---------|
+| np | Nutrition Panel |
+| il | Ingredient List |
+| me | Menu |
+| re | Recipe |
+| fi | Food Items |
+| di | Drink Items |
+| fa | Food Advertisement |
+| fp | Food Packaging |
 
 ## Lessons Learned
 
-1. Think in tokens         - Frame every problem as: "What tokens in, what tokens out?"
-2. Small models are powerful - 270M parameters is enough for structured extraction
-3. Data quality matters     - The FoodExtract-1k dataset's formatting directly impacts output structure
-4. Google Colab works       - A free T4 GPU can fine-tune this in under 20 minutes
+1. **Think in tokens** — Frame every problem as: "What tokens in, what tokens out?"
+2. **Small models are powerful** — 270M parameters is enough for structured extraction
+3. **Data quality matters** — The FoodExtract-1k dataset's formatting directly impacts output structure
+4. **Google Colab works** — A free T4 GPU can fine-tune this in under 20 minutes
 
 ## Conclusion
 
 Fine-tuning small language models democratizes AI customization. You can create task-specific models that run locally, work offline, and perform better than general-purpose APIs on your specific use case. The Food Extractor demonstrates how approachable this process has become with modern tooling.
 
-Check out the full notebook on Google Colab to try it yourself!
+Check out the [full notebook on Google Colab](https://colab.research.google.com/github/mrdbourke/learn-huggingface/blob/main/notebooks/hugging_face_llm_full_fine_tune_tutorial.ipynb) to try it yourself!
         `.trim(),
         tags: ['LLMs', 'Fine-Tuning', 'Hugging Face', 'Gemma', 'NLP', 'Python', 'Deep Learning'],
         date: '2026-02-03',
         readTime: '12 min read',
-        featured: true
+        featured: true,
+        githubUrl: 'https://github.com/danishsyed-dev/NVIDIA-DGX-Spark-hugging_face_llm_full_fine_tune_tutorial-VIDEO',
     },
     {
         id: 'building-rag-system-fastapi',
@@ -247,25 +328,54 @@ Retrieval-Augmented Generation (RAG) has become the go-to approach for grounding
 
 The system consists of three main components:
 
-1. Document Ingestion Pipeline  - Handles PDF, DOCX, and plain text files
-2. Vector Store                 - Uses FAISS for efficient similarity search
-3. Generation Layer             - Integrates with OpenAI's GPT models
+1. **Document Ingestion Pipeline** — Handles PDF, DOCX, and plain text files
+2. **Vector Store** — Uses FAISS for efficient similarity search
+3. **Generation Layer** — Integrates with OpenAI's GPT models
+
+\`\`\`
+┌──────────┐    ┌───────────┐    ┌──────────┐    ┌───────────┐
+│ Documents│───→│ Chunking  │───→│ Embeddings│───→│ FAISS     │
+│ (Upload) │    │ (Semantic)│    │ (OpenAI)  │    │ (Vector DB)│
+└──────────┘    └───────────┘    └──────────┘    └───────────┘
+                                                       │
+┌──────────┐    ┌───────────┐    ┌──────────┐          │
+│ Response │←───│ LLM       │←───│ Re-ranker│←─────────┘
+│ (JSON)   │    │ (GPT-4)   │    │ (Cross)  │
+└──────────┘    └───────────┘    └──────────┘
+\`\`\`
 
 ## Chunking Strategy
 
 One of the most critical decisions in RAG is how to chunk your documents. I experimented with:
 
-- Fixed-size chunks     (500 tokens with 50-token overlap)
-- Semantic chunks       (using sentence boundaries)
-- Recursive chunking    (hierarchical splitting)
+- **Fixed-size chunks** — 500 tokens with 50-token overlap
+- **Semantic chunks** — Using sentence boundaries
+- **Recursive chunking** — Hierarchical splitting
 
 Semantic chunking with sentence boundaries showed the best retrieval quality.
 
+## Quick Start
+
+\`\`\`bash
+# Clone and setup
+git clone https://github.com/danishsyed-dev/RAG-API.git
+cd RAG-API
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Set your API key
+export OPENAI_API_KEY=your_key_here
+
+# Run the server
+uvicorn app.main:app --reload
+\`\`\`
+
 ## Key Learnings
 
-1. Re-ranking retrieved chunks significantly improves answer quality
-2. Async processing is essential for production workloads
-3. Caching embeddings reduces latency by 60%
+1. **Re-ranking** retrieved chunks significantly improves answer quality
+2. **Async processing** is essential for production workloads
+3. **Caching embeddings** reduces latency by 60%
 
 ## Conclusion
 
@@ -274,7 +384,8 @@ Building a RAG system requires careful attention to each component in the pipeli
         tags: ['RAG', 'FastAPI', 'NLP', 'LLMs', 'Python'],
         date: '2025-10-15',
         readTime: '8 min read',
-        featured: true
+        featured: true,
+        githubUrl: 'https://github.com/danishsyed-dev/RAG-API',
     },
     {
         id: 'comparing-ml-models-cancer-prediction',
@@ -283,7 +394,7 @@ Building a RAG system requires careful attention to each component in the pipeli
         content: `
 ## The Challenge
 
-Cancer prediction requires models that are not just accurate, but also interpretable. Medical professionals need to understand why a model makes a prediction before trusting it with patient diagnoses.
+Cancer prediction requires models that are not just accurate, but also interpretable. Medical professionals need to understand *why* a model makes a prediction before trusting it with patient diagnoses.
 
 ## Models Evaluated
 
@@ -302,23 +413,29 @@ I tested 8 different algorithms:
 
 For medical applications, accuracy alone is insufficient. I focused on:
 
-- Sensitivity (Recall) - Minimizing missed diagnoses
-- Specificity          - Reducing false positives
-- F1-Score             - Balanced measure
-- AUC-ROC              - Overall discriminative ability
+| Metric | Purpose |
+|--------|---------|
+| Sensitivity (Recall) | Minimizing missed diagnoses |
+| Specificity | Reducing false positives |
+| F1-Score | Balanced measure |
+| AUC-ROC | Overall discriminative ability |
 
 ## Key Findings
 
 XGBoost consistently outperformed other models with:
-- F1-Score: 0.94
-- AUC-ROC: 0.97
-- Sensitivity: 0.96
+
+| Metric | Score |
+|--------|-------|
+| F1-Score | 0.94 |
+| AUC-ROC | 0.97 |
+| Sensitivity | 0.96 |
 
 However, Logistic Regression remained competitive and offered better interpretability.
 
 ## SHAP Analysis
 
 Using SHAP values, I identified the most important features:
+
 1. Cell size uniformity
 2. Clump thickness
 3. Marginal adhesion
@@ -328,7 +445,8 @@ These align with known clinical indicators, increasing model trustworthiness.
         tags: ['Machine Learning', 'Healthcare', 'XGBoost', 'SHAP', 'Classification'],
         date: '2025-11-08',
         readTime: '10 min read',
-        featured: true
+        featured: true,
+        githubUrl: 'https://github.com/danishsyed-dev/Scrutinizing-ML-Models-for-Cancer-Prediction',
     },
     {
         id: 'dataset-engineering-sports-analytics',
@@ -342,6 +460,7 @@ In sports analytics, the quality of your analysis is directly tied to the qualit
 ## Data Collection Challenges
 
 Collecting football data involves:
+
 - Web scraping player statistics
 - Handling missing values across sources
 - Normalizing data from different providers
@@ -351,21 +470,35 @@ Collecting football data involves:
 
 Beyond basic stats, I engineered:
 
-- Expected Goals (xG)   - Shot quality metric
-- Progressive Carries   - Ball advancement measure
-- Pressing Intensity    - Defensive contribution
-- Shot-Creating Actions - Chance creation
+| Feature | Description |
+|---------|-------------|
+| Expected Goals (xG) | Shot quality metric |
+| Progressive Carries | Ball advancement measure |
+| Pressing Intensity | Defensive contribution |
+| Shot-Creating Actions | Chance creation |
 
 ## Handling Temporal Data
 
 Player performance varies over a season. I implemented:
+
 - Rolling averages (5-match windows)
 - Seasonality adjustments
 - Form indicators
 
+\`\`\`python
+import pandas as pd
+
+# Example: calculating rolling xG
+df['rolling_xG'] = (
+    df.groupby('player')['xG']
+    .transform(lambda x: x.rolling(5, min_periods=1).mean())
+)
+\`\`\`
+
 ## Data Quality Checks
 
 Essential validation steps:
+
 1. Cross-reference multiple sources
 2. Check statistical distributions
 3. Validate against known aggregates
@@ -378,7 +511,8 @@ Good analytics starts with good data. Investing time in dataset engineering pays
         tags: ['Sports Analytics', 'Data Engineering', 'Football', 'Feature Engineering'],
         date: '2025-09-22',
         readTime: '7 min read',
-        featured: false
+        featured: false,
+        githubUrl: 'https://github.com/danishsyed-dev/laliga-forwards-analytics',
     }
 ];
 

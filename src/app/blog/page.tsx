@@ -1,14 +1,19 @@
-import { Metadata } from 'next';
+'use client';
+
+import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
+import Link from 'next/link';
 import { BlogCard } from '@/components';
 import { blogPosts, getAllTags } from '@/data/blog';
 
-export const metadata: Metadata = {
-    title: 'Blog',
-    description: 'Technical articles on Machine Learning, NLP, Data Science, and software engineering.',
-};
+function BlogContent() {
+    const searchParams = useSearchParams();
+    const activeTag = searchParams.get('tag');
 
-export default function BlogPage() {
     const allTags = getAllTags();
+    const filteredPosts = activeTag
+        ? blogPosts.filter(post => post.tags.includes(activeTag))
+        : blogPosts;
 
     return (
         <div className="pt-24 pb-16">
@@ -30,30 +35,58 @@ export default function BlogPage() {
                         Browse by Topic
                     </h2>
                     <div className="flex flex-wrap gap-2">
+                        <Link
+                            href="/blog"
+                            className={`tag transition-colors ${!activeTag ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/10' : 'hover:border-[var(--accent)] hover:text-[var(--accent)]'}`}
+                        >
+                            All
+                        </Link>
                         {allTags.map((tag) => (
-                            <span
+                            <Link
                                 key={tag}
-                                className="tag hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors cursor-pointer"
+                                href={`/blog?tag=${encodeURIComponent(tag)}`}
+                                className={`tag transition-colors ${activeTag === tag ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/10' : 'hover:border-[var(--accent)] hover:text-[var(--accent)]'}`}
                             >
                                 {tag}
-                            </span>
+                            </Link>
                         ))}
                     </div>
                 </div>
 
+                {/* Active filter indicator */}
+                {activeTag && (
+                    <div className="mb-6 flex items-center gap-2">
+                        <span className="text-sm text-[var(--foreground-muted)]">
+                            Showing {filteredPosts.length} post{filteredPosts.length !== 1 ? 's' : ''} tagged
+                        </span>
+                        <span className="tag border-[var(--accent)] text-[var(--accent)]">
+                            {activeTag}
+                        </span>
+                        <Link
+                            href="/blog"
+                            className="text-sm text-[var(--foreground-subtle)] hover:text-[var(--accent)] ml-2"
+                        >
+                            ✕ Clear
+                        </Link>
+                    </div>
+                )}
+
                 {/* Blog Posts Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {blogPosts.map((post) => (
+                    {filteredPosts.map((post) => (
                         <BlogCard key={post.id} post={post} />
                     ))}
                 </div>
 
-                {/* Empty State (if no posts) */}
-                {blogPosts.length === 0 && (
+                {/* Empty State */}
+                {filteredPosts.length === 0 && (
                     <div className="text-center py-20">
-                        <p className="text-[var(--foreground-muted)]">
-                            No blog posts yet. Check back soon!
+                        <p className="text-[var(--foreground-muted)] mb-4">
+                            No posts found for this topic.
                         </p>
+                        <Link href="/blog" className="text-[var(--accent)] hover:text-[var(--accent-hover)]">
+                            View all posts →
+                        </Link>
                     </div>
                 )}
 
@@ -78,5 +111,19 @@ export default function BlogPage() {
                 </div>
             </div>
         </div>
+    );
+}
+
+export default function BlogPage() {
+    return (
+        <Suspense fallback={
+            <div className="pt-24 pb-16">
+                <div className="container-main">
+                    <div className="text-center py-20 text-[var(--foreground-muted)]">Loading...</div>
+                </div>
+            </div>
+        }>
+            <BlogContent />
+        </Suspense>
     );
 }
