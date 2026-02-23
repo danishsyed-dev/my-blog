@@ -231,12 +231,12 @@ pre code {
 
 .btn-primary {
   background: var(--accent);
-  color: white;
+  color: white !important;
 }
 
 .btn-primary:hover {
   background: var(--accent-hover);
-  color: white;
+  color: white !important;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
