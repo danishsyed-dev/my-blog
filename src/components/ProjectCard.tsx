@@ -40,11 +40,14 @@ export default function ProjectCard({ project, variant = 'default' }: ProjectCar
             </div>
 
             {/* Title */}
-            <h3 className="font-serif text-xl font-semibold text-[var(--foreground)] mb-3 group-hover:text-[var(--accent)] transition-colors">
+            <h3 className="font-serif text-xl font-semibold text-[var(--foreground)] mb-1 group-hover:text-[var(--accent)] transition-colors">
                 <Link href={`/projects/${project.id}`}>
                     {project.title}
                 </Link>
             </h3>
+            {project.subtitle && (
+                <p className="text-xs text-[var(--foreground-subtle)] mb-3">{project.subtitle}</p>
+            )}
 
             {/* Description */}
             <p className="text-sm text-[var(--foreground-muted)] mb-4 line-clamp-3">
