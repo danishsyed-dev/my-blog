@@ -181,13 +181,147 @@ pip install -r requirements.txt
 python application.py
 \`\`\`
 
-The web UI will be available at \`http://localhost:5000\`.
         `.trim(),
         tags: ['Machine Learning', 'Dynamic Pricing', 'Flask', 'LightGBM', 'Python'],
         date: '2025-10-15',
         readTime: '8 min read',
         featured: true,
         githubUrl: 'https://github.com/danishsyed-dev/ml-sales-prediction',
+    },
+    {
+        id: 'silver-price-prediction-india',
+        title: 'How I Built a Silver Price Prediction Model and Shipped it Live',
+        excerpt: 'An end-to-end machine learning project to predict silver prices for the Indian market — from model training to live deployment on Hugging Face Spaces.',
+        content: `
+## The Problem
+
+If you've ever tried to check silver prices in India, you know the pain — most global APIs give prices in USD per troy ounce, which means nothing to an Indian buyer who thinks in ₹ per gram. I wanted to build something that not only **predicts** tomorrow's silver price but also shows **accurate Indian market rates** with GST included.
+
+🚀 **Try it live:** [Silver Price Prediction App](https://danishali11903-silver-price-prediction.hf.space)
+
+## What I Built
+
+A full-stack ML application that does two things:
+
+1. **Fetches real-time silver prices** and converts them to Indian market rates (₹ per gram, per 10g, per kg) — including import duties and 3% GST
+2. **Predicts next-day prices** using a Lasso Regression model trained on historical data
+
+| Feature | Description |
+|---------|-------------|
+| ✅ Live Prices | Real-time data from MetalpriceAPI |
+| ✅ Indian Market | Prices in INR with import duties + GST |
+| ✅ ML Predictions | Next-day price forecast |
+| ✅ REST API | JSON endpoints for integration |
+| ✅ Multi-source Fallback | MetalpriceAPI → Yahoo Finance → Local CSV |
+
+## How the Architecture Works
+
+The system follows a simple three-stage pipeline:
+
+\`\`\`
+┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
+│  MetalpriceAPI  │────▶│   Flask App      │────▶│   ML Model      │
+│  (Live Prices)  │     │   (Conversion)   │     │   (Prediction)  │
+└─────────────────┘     └──────────────────┘     └─────────────────┘
+         │                       │                        │
+         ▼                       ▼                        ▼
+   USD/oz prices         INR conversion          Next-day forecast
+                         + GST (3%)
+\`\`\`
+
+**The price conversion pipeline** is where it gets interesting. You can't just multiply USD × exchange rate — Indian silver prices include layers of additional costs:
+
+1. Fetch USD price per troy ounce from MetalpriceAPI
+2. Convert using live USD/INR exchange rate
+3. Convert troy ounce to grams (÷ 31.1035)
+4. Add Import Duty (+6%)
+5. Add Local Premium (+10%)
+6. Add GST (+3%)
+
+The result? Prices that match GoodReturns.in (Hyderabad rates) within ₹5-10 accuracy.
+
+## The ML Model
+
+I experimented with several regression models and landed on **Lasso Regression** for its simplicity and strong performance:
+
+| Metric | Value |
+|--------|-------|
+| Algorithm | Lasso Regression |
+| R² Score | **0.9836** |
+| Library | scikit-learn 1.7.0 |
+
+The model uses a rich set of features engineered from historical price data:
+
+- **Lag features:** Closing prices from 1, 2, 3, 5, and 7 days ago
+- **Moving averages:** 5-day, 10-day, and 20-day windows
+- **Technical indicators:** RSI, MACD, and Bollinger Bands
+
+An R² of 0.98 means the model explains 98% of the variance in price movements — which is excellent for a regression task on financial data.
+
+## Data Source Strategy
+
+One lesson I learned early: **never rely on a single data source.** APIs go down, rate limits kick in, and free tiers expire. So I built a three-tier fallback system:
+
+| Priority | Source | Why |
+|----------|--------|-----|
+| 1 | MetalpriceAPI | Most accurate, 24-hour cache |
+| 2 | Yahoo Finance | Free backup (XAGUSD=X ticker) |
+| 3 | Local CSV | Offline fallback for historical data |
+
+The 24-hour caching layer ensures I'm not burning through API credits on every request.
+
+## API Design
+
+The Flask app exposes two clean endpoints:
+
+\`\`\`
+GET /api/predict         → Next-day price prediction
+GET /api/current-price   → Current market price with GST
+\`\`\`
+
+**Sample response:**
+\`\`\`json
+{
+    "success": true,
+    "market": "India",
+    "currency": "INR",
+    "with_gst": {
+        "per_10_grams": 3650,
+        "per_kg": 365000
+    },
+    "gst_rate": "3%"
+}
+\`\`\`
+
+## Shipping to Production
+
+Getting the model from my laptop to a live URL involved deploying to **Hugging Face Spaces**. The deployment is straightforward — push the Flask app with the trained model artifacts, and HF Spaces handles the rest.
+
+\`\`\`bash
+# Clone and run locally
+git clone https://github.com/danishsyed-dev/Silver-Price-Prediction.git
+cd Silver-Price-Prediction
+pip install -r requirements.txt
+python app.py
+\`\`\`
+
+## Key Takeaways
+
+1. **Domain knowledge matters more than model complexity** — Understanding how Indian silver pricing works (import duty, GST, local premiums) was more valuable than trying fancier ML models
+2. **Build fallback systems** — External APIs will fail; plan for it from day one
+3. **Cache aggressively** — 24-hour caching reduced my API costs to nearly zero
+4. **Ship early** — Deploying to Hugging Face Spaces took less than 10 minutes and gave me a shareable URL instantly
+
+## ⚠️ Disclaimer
+
+This project is for educational purposes only. Actual silver prices at jewellers may include making charges (8-20%), wastage charges, purity variations (925, 999), and local market premiums. Do not use for actual trading decisions.
+        `.trim(),
+        tags: ['Machine Learning', 'Silver Price Prediction', 'Flask', 'Python', 'Hugging Face'],
+        date: '2025-10-15',
+        readTime: '10 min read',
+        featured: true,
+        githubUrl: 'https://github.com/danishsyed-dev/Silver-Price-Prediction',
+        liveUrl: 'https://danishali11903-silver-price-prediction.hf.space',
     },
     {
         id: 'food-extractor',
