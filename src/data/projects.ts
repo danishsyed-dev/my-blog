@@ -21,6 +21,20 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: 'ML-Income-Predictor',
+    title: 'InComeIQ',
+    subtitle: 'ML Income Predictor',
+    description: 'A production-ready Machine Learning pipeline and web application for demographic income classification. It features an object-oriented training pipeline, REST APIs, and dynamic feature explainability.',
+    problemStatement: 'Many ML projects stop at basic Jupyter Notebooks. Real-world applications require transitioning raw data science code into modular software, while also defeating the "black box" nature of ML models to provide transparent AI.',
+    methodology: 'Built a modular architecture with object-oriented feature engineering using Sklearn Pipelines. Implemented an automated orchestrator comparing models via GridSearchCV. Developed a REST API with Flask and a custom PredictionPipeline with in-memory artifact caching. Engineered dynamic feature explainability using Matplotlib/Seaborn.',
+    results: 'XGBoost emerged as the best model with ~84% accuracy. Delivered a system providing confidence percentages and dynamically generated bar charts to explain predictions. The modern "glassmorphism" web app natively logs all requests to a SQLite database.',
+    tools: ['Scikit-Learn', 'XGBoost', 'Pandas', 'Flask', 'SQLAlchemy', 'Docker', 'Matplotlib', 'HTML5/CSS3'],
+    githubUrl: 'https://github.com/danishsyed-dev/InComeIQ',
+    featured: true,
+    category: 'ml',
+    date: '2026-02'
+  },
+  {
     id: 'relay-context',
     title: 'RelayContext',
     description: 'A Node.js-based CLI tool that captures and persists structured AI coding context-reasoning, decisions, and task state-alongside Git branches. It enables seamless continuation of AI-assisted development across sessions, IDEs, and devices without re-explaining project architecture or progress.',

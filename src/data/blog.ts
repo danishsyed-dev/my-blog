@@ -14,6 +14,77 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
     {
+        id: 'income-iq-building-production-ready-ml',
+        title: 'Building a Production-Ready ML Pipeline: The ML Income Predictor',
+        excerpt: 'A deep dive into transitioning from a basic Jupyter Notebook to a fully object-oriented, production-ready Machine Learning pipeline and web application for demographic income classification.',
+        content: `
+## Introduction
+
+Many Machine Learning projects stop at a basic Jupyter Notebook. You load data, train a model, print an accuracy score, and call it a day. But real-world applications require transitioning raw data science code into modular, maintainable software. 
+
+The **ML Income Predictor (InComeIQ)** is an end-to-end classification system built to predict whether an individual's income exceeds $50K/yr based on demographic data from the Adult Census dataset, demonstrating exactly how to productionize ML.
+
+## 🚀 Key Features
+
+This project moves beyond standard modeling by introducing several production-grade features:
+
+### Intelligent Model Selection
+Instead of blindly picking an algorithm, I built an automated orchestrator that compares multiple models:
+- Random Forest
+- Decision Tree
+- Logistic Regression
+- Support Vector Machines (SVM)
+- XGBoost 
+
+Using \`GridSearchCV\` for hyperparameter tuning, **XGBoost emerged as the champion with an accuracy of ~84%.**
+
+### Dynamic Feature Explainability
+To defeat the "black box" nature of ML models, the app dynamically generates a matplotlib/seaborn bar chart on every prediction. This shows exactly which user inputs (e.g., Age, Education, Capital Gain) drove the model's decision, providing a transparent AI experience.
+
+### Confidence Scoring
+A binary "Yes/No" isn't always enough. The pipeline extracts \`predict_proba()\` metrics to present users with a precise confidence percentage alongside their prediction.
+
+### Production REST API & Tracking
+The system exposes \`/api/predict\` and \`/api/history\` endpoints for programmatic access. It natively logs all incoming requests, predictions, and confidence scores to a SQLite database using SQLAlchemy.
+
+### In-Memory Artifact Caching
+A common bottleneck in ML apps is disk I/O when loading large model files. The custom \`PredictionPipeline\` caches the 30MB+ preprocessor and model artifacts in memory after the first load, eliminating latency on subsequent predictions.
+
+### Premium Web Interface
+A custom-built, responsive web app using the Flask App Factory pattern and a modern "glassmorphism" CSS design. It includes strict backend validation to prevent malformed data crashes.
+
+## 🛠️ Technical Stack
+
+- **Machine Learning**: Scikit-Learn, XGBoost, Pandas, Numpy, Joblib
+- **Backend / API**: Python 3, Flask, Flask-SQLAlchemy, SQLite
+- **Data Visualization**: Matplotlib, Seaborn
+- **Frontend**: HTML5, CSS3 (Vanilla / Glassmorphism UI)
+- **Deployment**: Docker, Gunicorn
+
+## 🏗️ Architecture & Design Patterns
+
+The codebase was heavily refactored from a monolithic script into a clean, modular architecture:
+
+- **\`config/\`**: Centralized configuration management. Uses \`pathlib\` to eliminate hardcoded file paths, and defines hyperparameter grids and feature schemas in one place.
+- **\`data/\` & \`models/\`**: Object-oriented feature engineering. The \`DataPreprocessor\` utilizes Sklearn's \`Pipeline\` to handle imputation and scaling, while securely capping outliers using the Interquartile Range (IQR) method to preserve data integrity.
+- **\`pipelines/\`**: Decouples the training orchestrator (\`train.py\`) from the inference engine (\`predict.py\`).
+- **\`core/\`**: Implements custom exception handling (tracing exact line numbers/files) and a rotating file logger to monitor pipeline health in production.
+
+## 💡 Conclusion: What this project demonstrates
+
+1. **Software Engineering for ML**: How to transition from scripts to modular software architectures.
+2. **Model Explainability**: A commitment to transparent AI by visually explaining predictions.
+3. **Full-Stack Capability**: Handling everything from data cleaning and algorithm tuning to database design, API routing, and CSS styling.
+
+Check out the full source code and documentation on the GitHub repository to see these engineering practices in action.
+        `.trim(),
+        tags: ['Machine Learning', 'XGBoost', 'Python', 'Flask', 'Data Engineering', 'Sklearn'],
+        date: '2026-02-27',
+        readTime: '6 min read',
+        featured: true,
+        githubUrl: 'https://github.com/danishsyed-dev/InComeIQ',
+    },
+    {
         id: 'relaycontext-a-cli-tool-for-ai-coding-context-persistence',
         title: 'RelayContext: A CLI Tool for AI Coding Context Persistence',
         excerpt: 'A practical guide to building RelayContext, a Node.js CLI tool that captures and persists structured AI coding context — reasoning, decisions, and task state — alongside Git branches.',
