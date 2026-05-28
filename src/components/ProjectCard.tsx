@@ -7,11 +7,11 @@ interface ProjectCardProps {
 }
 
 const categoryColors: Record<Project['category'], string> = {
-    ml: 'text-emerald-400 border-emerald-400/30 bg-emerald-400/10',
-    nlp: 'text-blue-400 border-blue-400/30 bg-blue-400/10',
-    analytics: 'text-purple-400 border-purple-400/30 bg-purple-400/10',
-    web: 'text-orange-400 border-orange-400/30 bg-orange-400/10',
-    research: 'text-pink-400 border-pink-400/30 bg-pink-400/10',
+    ml: 'text-emerald-700 bg-emerald-50 border-emerald-200 dark:text-emerald-400 dark:bg-emerald-400/10 dark:border-emerald-400/30',
+    nlp: 'text-blue-700 bg-blue-50 border-blue-200 dark:text-blue-400 dark:bg-blue-400/10 dark:border-blue-400/30',
+    analytics: 'text-purple-700 bg-purple-50 border-purple-200 dark:text-purple-400 dark:bg-purple-400/10 dark:border-purple-400/30',
+    web: 'text-orange-700 bg-orange-50 border-orange-200 dark:text-orange-400 dark:bg-orange-400/10 dark:border-orange-400/30',
+    research: 'text-pink-700 bg-pink-50 border-pink-200 dark:text-pink-400 dark:bg-pink-400/10 dark:border-pink-400/30',
 };
 
 const categoryLabels: Record<Project['category'], string> = {

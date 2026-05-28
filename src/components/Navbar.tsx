@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect, useRef } from 'react';
 import { siteConfig } from '@/data/site';
+import ThemeToggle from './ThemeToggle';
 
 export default function Navbar() {
     const pathname = usePathname();
@@ -82,16 +83,19 @@ export default function Navbar() {
 
                         {/* Desktop Navigation */}
                         <div className="hidden md:flex items-center gap-8">
-                            {siteConfig.navLinks.map((link) => (
-                                <Link
-                                    key={link.href}
-                                    href={link.href}
-                                    className={`nav-link text-sm font-medium ${pathname === link.href ? 'active' : ''
-                                        }`}
-                                >
-                                    {link.name}
-                                </Link>
-                            ))}
+                            <div className="flex items-center gap-8">
+                                {siteConfig.navLinks.map((link) => (
+                                    <Link
+                                        key={link.href}
+                                        href={link.href}
+                                        className={`nav-link text-sm font-medium ${pathname === link.href ? 'active' : ''
+                                            }`}
+                                    >
+                                        {link.name}
+                                    </Link>
+                                ))}
+                            </div>
+                            <ThemeToggle />
                         </div>
 
                         {/* Mobile Menu Button */}
@@ -144,6 +148,10 @@ export default function Navbar() {
                                         {link.name}
                                     </Link>
                                 ))}
+                                <div className="pt-4 mt-2 border-t border-[var(--border)] flex items-center justify-between">
+                                    <span className="text-xs text-[var(--foreground-subtle)] font-medium">Appearance</span>
+                                    <ThemeToggle />
+                                </div>
                             </div>
                         </div>
                     )}
