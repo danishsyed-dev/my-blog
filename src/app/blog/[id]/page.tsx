@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { blogPosts, getPostById } from '@/data/blog';
+import { siteConfig } from '@/data/site';
 
 interface BlogPostPageProps {
     params: Promise<{ id: string }>;
@@ -287,11 +288,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
                 {/* Cover Image */}
                 {post.coverImage && (
-                    <div className="mb-8 rounded-xl overflow-hidden border border-[var(--border)]">
+                    <div className="mb-8 rounded-xl overflow-hidden border border-[var(--border)] aspect-[16/9] w-full relative">
                         <img
                             src={post.coverImage}
                             alt={post.title}
-                            className="w-full h-auto object-cover"
+                            className="w-full h-full object-cover"
+                            loading="eager"
                         />
                     </div>
                 )}
@@ -377,7 +379,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                         <div className="flex items-center gap-4">
                             <span className="text-sm text-[var(--foreground-subtle)]">Share:</span>
                             <a
-                                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(`https://danishsyed.dev/blog/${post.id}`)}`}
+                                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(`${siteConfig.url}/blog/${post.id}`)}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-[var(--foreground-muted)] hover:text-[var(--accent)]"
@@ -387,7 +389,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                                 </svg>
                             </a>
                             <a
-                                href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://danishsyed.dev/blog/${post.id}`)}`}
+                                href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`${siteConfig.url}/blog/${post.id}`)}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-[var(--foreground-muted)] hover:text-[var(--accent)]"

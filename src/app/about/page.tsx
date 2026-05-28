@@ -90,11 +90,9 @@ export default function AboutPage() {
                             rel="me noopener noreferrer"
                             className="btn btn-secondary inline-flex items-center gap-2"
                         >
-                            <img
-                                src="https://orcid.org/sites/default/files/images/orcid_16x16.png"
-                                style={{ width: '1em' }}
-                                alt="ORCID iD icon"
-                            />
+                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm-3.923 18.066h-1.44v-10.02h1.44v10.02zm-.72-11.166a.855.855 0 1 1 0-1.71.855.855 0 0 1 0 1.71zm9.73 11.166h-1.44v-5.146c0-1.332-.477-2.253-1.67-2.253-.912 0-1.455.614-1.693 1.207-.087.21-.113.504-.113.798v5.394h-1.44v-10.02h1.44V9.38h.02c.192-.31.579-1.134 2.103-1.134 1.536 0 2.69 1.002 2.69 3.16v6.66z" />
+                            </svg>
                             ORCID
                         </a>
                     </div>

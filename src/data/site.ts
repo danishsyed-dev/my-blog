@@ -3,7 +3,7 @@ const basePath = process.env.NODE_ENV === 'production' ? '/my-blog' : '';
 
 export const siteConfig = {
     basePath,
-    name: 'SYED DANISH ALI',
+    name: 'Syed Danish Ali',
     title: 'SYED DANISH ALI | AI & ML Engineer',
     description: 'AI & Machine Learning engineer focused on building data-driven systems, intelligent models, and applied research solutions.',
     url: 'https://syeddanishali.me/my-blog', // Update with your actual domain

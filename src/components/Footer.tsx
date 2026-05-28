@@ -27,7 +27,7 @@ export default function Footer() {
                             Navigation
                         </h3>
                         <ul className="space-y-2">
-                            {siteConfig.navLinks.slice(0, 5).map((link) => (
+                            {siteConfig.navLinks.map((link) => (
                                 <li key={link.href}>
                                     <Link
                                         href={link.href}
@@ -150,8 +150,8 @@ function EmailIcon({ className }: { className?: string }) {
 
 function OrcidIcon({ className }: { className?: string }) {
     return (
-        <svg className={className} viewBox="0 0 256 256" fill="currentColor">
-            <path d="M128 0C57.3 0 0 57.3 0 128s57.3 128 128 128 128-57.3 128-128S198.7 0 128 0zM86.3 186.2H70.9V79.5h15.4v106.7zm-7.7-121c-5.4 0-9.3-4.2-9.3-9.1 0-5 3.9-9.1 9.3-9.1s9.1 4.1 9.1 9.1c0 4.9-3.7 9.1-9.1 9.1zm92.4 121h-15.4v-54.8c0-14.2-5.1-24-17.8-24-9.7 0-15.5 6.5-18 12.8-.9 2.3-1.2 5.5-1.2 8.7v57.3H104V79.5h15.4v14.7h.2c2.2-3.3 6.2-12.1 22.4-12.1 16.4 0 28.7 10.7 28.7 33.7v70.4z" />
+        <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm-3.923 18.066h-1.44v-10.02h1.44v10.02zm-.72-11.166a.855.855 0 1 1 0-1.71.855.855 0 0 1 0 1.71zm9.73 11.166h-1.44v-5.146c0-1.332-.477-2.253-1.67-2.253-.912 0-1.455.614-1.693 1.207-.087.21-.113.504-.113.798v5.394h-1.44v-10.02h1.44V9.38h.02c.192-.31.579-1.134 2.103-1.134 1.536 0 2.69 1.002 2.69 3.16v6.66z" />
         </svg>
     );
 }

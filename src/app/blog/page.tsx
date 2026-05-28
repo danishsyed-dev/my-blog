@@ -90,25 +90,7 @@ function BlogContent() {
                     </div>
                 )}
 
-                {/* Newsletter CTA */}
-                <div className="mt-16 p-8 bg-[var(--background-secondary)] border border-[var(--border)] rounded-xl text-center">
-                    <h2 className="font-serif text-2xl font-bold text-[var(--foreground)] mb-3">
-                        Stay Updated
-                    </h2>
-                    <p className="text-[var(--foreground-muted)] mb-6 max-w-md mx-auto">
-                        Get notified when I publish new articles about AI, ML, and data science.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                        <input
-                            type="email"
-                            placeholder="your@email.com"
-                            className="input flex-1"
-                        />
-                        <button className="btn btn-primary whitespace-nowrap">
-                            Subscribe
-                        </button>
-                    </div>
-                </div>
+
             </div>
         </div>
     );

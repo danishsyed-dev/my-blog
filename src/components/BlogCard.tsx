@@ -7,14 +7,15 @@ interface BlogCardProps {
 
 export default function BlogCard({ post }: BlogCardProps) {
     return (
-        <article className="card group">
+        <article className="card group relative">
             {/* Cover Image */}
             {post.coverImage && (
-                <div className="mb-4 -mx-6 -mt-6 overflow-hidden rounded-t-lg">
+                <div className="mb-4 -mx-6 -mt-6 overflow-hidden rounded-t-lg" style={{ aspectRatio: '16/9' }}>
                     <img
                         src={post.coverImage}
                         alt={post.title}
-                        className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                 </div>
             )}
@@ -28,7 +29,7 @@ export default function BlogCard({ post }: BlogCardProps) {
 
             {/* Title */}
             <h3 className="font-serif text-lg font-semibold text-[var(--foreground)] mb-2 group-hover:text-[var(--accent)] transition-colors">
-                <Link href={`/blog/${post.id}`}>
+                <Link href={`/blog/${post.id}`} className="after:absolute after:inset-0">
                     {post.title}
                 </Link>
             </h3>
@@ -39,7 +40,7 @@ export default function BlogCard({ post }: BlogCardProps) {
             </p>
 
             {/* Tags */}
-            <div className="flex flex-wrap gap-2 mt-auto">
+            <div className="flex flex-wrap gap-2 mt-auto relative z-10">
                 {post.tags.slice(0, 3).map((tag) => (
                     <Link
                         key={tag}

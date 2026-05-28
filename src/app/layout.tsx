@@ -72,8 +72,11 @@ export default function RootLayout({
           fontFamily: 'var(--font-inter), sans-serif',
         }}
       >
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
         <Navbar />
-        <main className="min-h-screen">
+        <main id="main" className="min-h-screen">
           {children}
         </main>
         <Footer />

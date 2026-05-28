@@ -27,7 +27,7 @@ export default function ProjectCard({ project, variant = 'default' }: ProjectCar
 
     return (
         <article
-            className={`card group ${isFeatured ? 'md:col-span-2' : ''}`}
+            className={`card group relative ${isFeatured ? 'md:col-span-2' : ''}`}
         >
             {/* Category Badge */}
             <div className="flex items-center justify-between mb-4">
@@ -41,7 +41,7 @@ export default function ProjectCard({ project, variant = 'default' }: ProjectCar
 
             {/* Title */}
             <h3 className="font-serif text-xl font-semibold text-[var(--foreground)] mb-1 group-hover:text-[var(--accent)] transition-colors">
-                <Link href={`/projects/${project.id}`}>
+                <Link href={`/projects/${project.id}`} className="after:absolute after:inset-0">
                     {project.title}
                 </Link>
             </h3>
@@ -72,7 +72,7 @@ export default function ProjectCard({ project, variant = 'default' }: ProjectCar
             </div>
 
             {/* Links */}
-            <div className="flex items-center gap-4 pt-4 border-t border-[var(--border)]">
+            <div className="flex items-center gap-4 pt-4 border-t border-[var(--border)] relative z-10">
                 <Link
                     href={`/projects/${project.id}`}
                     className="text-sm text-[var(--accent)] hover:text-[var(--accent-hover)] font-medium inline-flex items-center gap-1"
