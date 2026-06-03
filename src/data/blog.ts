@@ -97,7 +97,7 @@ Training will load and clean data, calculate Elo ratings from scratch, engineer 
 This project shows that domain knowledge - building a proper Elo system, encoding form, weighting tournament types - matters far more than model complexity. The feature engineering pipeline is the real differentiator, not the algorithm choice.
         `.trim(),
         tags: ['FIFA', 'Football', 'Machine Learning','Prediction', 'Sports Analytics', 'Python', 'XGBoost', 'LightGBM', 'Elo Rating', 'Pandas', 'Streamlit', 'Feature Engineering'],
-        date: '2024-01-01',
+        date: '2026-06-02',
         readTime: '6 min read',
         featured: true,
         githubUrl: 'https://github.com/danishsyed-dev/FIFA-World-Cup-Match-Outcome-Predictor',

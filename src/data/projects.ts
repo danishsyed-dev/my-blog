@@ -21,6 +21,20 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: 'fifa-match-outcome-predictor',
+    title: 'FIFA World Cup Match Outcome Predictor',
+    subtitle: 'Win / Draw / Loss Predictor',
+    description: 'An ML system that predicts the outcome of any international football match using Elo ratings, recent form, head-to-head records, and tournament weights - achieving accuracy that matches expert forecasters.',
+    problemStatement: 'Predicting football match outcomes is one of the hardest problems in sports analytics - expert forecasters only achieve 55-60% accuracy. The challenge is encoding what actually determines a match result beyond raw statistics.',
+    methodology: 'Built a custom Elo rating system from scratch using the World Football Elo formula, processing international results from 1872-2026. Engineered six domain-aware features including recent form (Win=3, Draw=1, Loss=0), rolling goals averages, head-to-head records, home advantage, and tournament weighting. Compared four models: Logistic Regression, Random Forest, XGBoost, and LightGBM. Deployed an interactive Streamlit dashboard for match predictions.',
+    results: 'XGBoost and LightGBM emerged as primary models, targeting 55-70% accuracy - matching or beating expert forecasters. The custom Elo calculator aggregates every international match in history to produce a dynamic team strength estimate.',
+    tools: ['Scikit-Learn', 'XGBoost', 'LightGBM', 'Pandas', 'NumPy', 'Streamlit', 'Matplotlib', 'Seaborn'],
+    githubUrl: 'https://github.com/danishsyed-dev/FIFA-World-Cup-Match-Outcome-Predictor',
+    featured: true,
+    category: 'ml',
+    date: '2026-06'
+  },
+  {
     id: 'ML-Income-Predictor',
     title: 'InComeIQ',
     subtitle: 'ML Income Predictor',
