@@ -72,8 +72,8 @@ function ProjectsContent() {
 
             {/* Projects Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {filteredProjects.map((project) => (
-                    <ProjectCard key={project.id} project={project} />
+                {filteredProjects.map((project, i) => (
+                    <ProjectCard key={project.id} project={project} index={i} />
                 ))}
             </div>
 
@@ -113,49 +113,83 @@ function ProjectsLoading() {
 
 export default function ProjectsPage() {
     return (
-        <div className="pt-24 pb-16">
-            <div className="container-main">
-                {/* Header */}
-                <header className="mb-12">
-                    <h1 className="font-serif text-4xl md:text-5xl font-bold text-[var(--foreground)] mb-4">
-                        Projects
-                    </h1>
-                    <p className="text-xl text-[var(--foreground-muted)] max-w-2xl">
-                        A collection of research projects and engineering work spanning machine learning,
-                        NLP, data analytics, and web development.
-                    </p>
-                </header>
-
-                <Suspense fallback={<ProjectsLoading />}>
-                    <ProjectsContent />
-                </Suspense>
-
-                {/* Summary Stats */}
-                <div className="mt-16 p-8 bg-[var(--background-secondary)] border border-[var(--border)] rounded-xl">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                        <div>
-                            <p className="text-3xl font-serif font-bold text-[var(--foreground)]">{projects.length}</p>
-                            <p className="text-sm text-[var(--foreground-muted)] mt-1">Total Projects</p>
-                        </div>
-                        <div>
-                            <p className="text-3xl font-serif font-bold text-[var(--foreground)]">
-                                {projects.filter(p => p.category === 'ml' || p.category === 'nlp').length}
-                            </p>
-                            <p className="text-sm text-[var(--foreground-muted)] mt-1">ML/NLP Projects</p>
-                        </div>
-                        <div>
-                            <p className="text-3xl font-serif font-bold text-[var(--foreground)]">
-                                {new Set(projects.flatMap(p => p.tools)).size}
-                            </p>
-                            <p className="text-sm text-[var(--foreground-muted)] mt-1">Technologies Used</p>
-                        </div>
-                        <div>
-                            <p className="text-3xl font-serif font-bold text-[var(--foreground)]">
-                                {projects.filter(p => p.featured).length}
-                            </p>
-                            <p className="text-sm text-[var(--foreground-muted)] mt-1">Featured</p>
+        <div>
+            {/* ── Page Hero Banner ── */}
+            <div className="page-hero-banner pt-24" style={{
+                background: 'linear-gradient(135deg, #1a1a3e 0%, #2e2870 35%, #1f0a2d 65%, #0f3d1e 100%)'
+            }}>
+                {/* Background image overlay */}
+                <img 
+                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop"
+                    alt=""
+                    aria-hidden="true"
+                    className="page-hero-bg-image"
+                />
+                {/* Noise overlay */}
+                <div className="page-hero-noise" />
+                {/* Big decorative glyph */}
+                <div className="page-hero-glyph" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="0.75">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v10m0 0h10m-10 0H5m10 0a2 2 0 002-2v-4m0 0V7m0 6V7m0 0H9" />
+                    </svg>
+                </div>
+                {/* Shimmer line */}
+                <div className="page-hero-shimmer" />
+                <div className="container-main">
+                    <div className="page-hero-content">
+                        <span className="page-hero-eyebrow">Portfolio</span>
+                        <h1 className="page-hero-title">Projects</h1>
+                        <p className="page-hero-subtitle">
+                            A collection of research projects and engineering work spanning machine learning,
+                            NLP, data analytics, and web development.
+                        </p>
+                        <div className="page-hero-meta">
+                            <span>{projects.filter(p => p.featured).length} featured</span>
+                            <span className="page-hero-dot" />
+                            <span>{projects.length} total</span>
+                            <span className="page-hero-dot" />
+                            <span>ML · NLP · Research</span>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            {/* ── Page Body ── */}
+            <div className="pb-16">
+                <div className="container-main pt-10">
+
+                    <Suspense fallback={<ProjectsLoading />}>
+                        <ProjectsContent />
+                    </Suspense>
+
+                    {/* Summary Stats */}
+                    <div className="mt-16 p-8 bg-[var(--background-secondary)] border border-[var(--border)] rounded-xl">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                            <div>
+                                <p className="text-3xl font-serif font-bold text-[var(--foreground)]">{projects.length}</p>
+                                <p className="text-sm text-[var(--foreground-muted)] mt-1">Total Projects</p>
+                            </div>
+                            <div>
+                                <p className="text-3xl font-serif font-bold text-[var(--foreground)]">
+                                    {projects.filter(p => p.category === 'ml' || p.category === 'nlp').length}
+                                </p>
+                                <p className="text-sm text-[var(--foreground-muted)] mt-1">ML/NLP Projects</p>
+                            </div>
+                            <div>
+                                <p className="text-3xl font-serif font-bold text-[var(--foreground)]">
+                                    {new Set(projects.flatMap(p => p.tools)).size}
+                                </p>
+                                <p className="text-sm text-[var(--foreground-muted)] mt-1">Technologies Used</p>
+                            </div>
+                            <div>
+                                <p className="text-3xl font-serif font-bold text-[var(--foreground)]">
+                                    {projects.filter(p => p.featured).length}
+                                </p>
+                                <p className="text-sm text-[var(--foreground-muted)] mt-1">Featured</p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

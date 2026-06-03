@@ -9,17 +9,43 @@ export const metadata: Metadata = {
 
 export default function ResumePage() {
     return (
-        <div className="pt-24 pb-16">
-            <div className="container-narrow">
-                {/* Header */}
-                <header className="mb-12 text-center">
-                    <h1 className="font-serif text-4xl md:text-5xl font-bold text-[var(--foreground)] mb-4">
-                        Resume
-                    </h1>
-                    <p className="text-xl text-[var(--foreground-muted)]">
-                        Download my latest resume to learn more about my experience and skills.
-                    </p>
-                </header>
+        <div>
+            {/* ── Page Hero Banner ── */}
+            <div className="page-hero-banner pt-24" style={{
+                background: 'linear-gradient(135deg, #121c17 0%, #1a382c 35%, #255c46 65%, #0f1f18 100%)'
+            }}>
+                {/* Background image overlay */}
+                <img 
+                    src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?q=80&w=1200&auto=format&fit=crop"
+                    alt=""
+                    aria-hidden="true"
+                    className="page-hero-bg-image"
+                />
+                <div className="page-hero-noise" />
+                <div className="page-hero-glyph" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="0.75">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                    </svg>
+                </div>
+                <div className="page-hero-shimmer" />
+                <div className="container-narrow">
+                    <div className="page-hero-content">
+                        <span className="page-hero-eyebrow">Credentials</span>
+                        <h1 className="page-hero-title">Resume</h1>
+                        <p className="page-hero-subtitle">
+                            Download my latest resume to learn more about my experience and skills.
+                        </p>
+                        <div className="page-hero-meta">
+                            <span>Last updated: {siteConfig.resume.lastUpdated}</span>
+                            <span className="page-hero-dot" />
+                            <span>PDF & Web</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="pb-16 pt-12">
+                <div className="container-narrow">
 
                 {/* Resume Preview Card */}
                 <div className="bg-[var(--background-secondary)] border border-[var(--border)] rounded-xl overflow-hidden">
@@ -141,5 +167,6 @@ export default function ResumePage() {
                 </div>
             </div>
         </div>
+    </div>
     );
 }

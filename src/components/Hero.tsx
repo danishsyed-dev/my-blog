@@ -6,8 +6,26 @@ export default function Hero() {
     const featuredProjects = getFeaturedProjects();
 
     return (
-        <section className="min-h-screen flex items-center pt-16">
-            <div className="container-main py-20">
+        <section className="min-h-screen flex items-center pt-16 page-hero-banner" style={{
+            background: 'linear-gradient(135deg, #0d121f 0%, #151a30 35%, #252b48 65%, #080c16 100%)',
+            paddingBottom: '5rem'
+        }}>
+            {/* Background image overlay */}
+            <img 
+                src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1600&auto=format&fit=crop"
+                alt=""
+                aria-hidden="true"
+                className="page-hero-bg-image"
+                style={{ opacity: 0.05 }}
+            />
+            <div className="page-hero-noise" />
+            <div className="page-hero-glyph" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth="0.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
+            </div>
+            <div className="page-hero-shimmer" />
+            <div className="container-main py-20 relative z-10">
                 <div className="max-w-3xl">
                     {/* Greeting */}
                     <p className="text-[var(--accent)] text-sm font-medium tracking-wide uppercase mb-4 animate-fadeIn">
@@ -82,7 +100,7 @@ export default function Hero() {
                             aria-label="ORCID"
                         >
                             <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm-3.923 18.066h-1.44v-10.02h1.44v10.02zm-.72-11.166a.855.855 0 1 1 0-1.71.855.855 0 0 1 0 1.71zm9.73 11.166h-1.44v-5.146c0-1.332-.477-2.253-1.67-2.253-.912 0-1.455.614-1.693 1.207-.087.21-.113.504-.113.798v5.394h-1.44v-10.02h1.44V9.38h.02c.192-.31.579-1.134 2.103-1.134 1.536 0 2.69 1.002 2.69 3.16v6.66z" />
+                                <path d="M12 24C5.373 24 0 18.627 0 12 0 5.373 5.373 0 12 0c6.627 0 12 5.373 12 12 0 6.627-5.373 12-12 12zM9.92 18.847c0 .355-.288.643-.643.643H6.55c-.355 0-.643-.288-.643-.643V8.898c0-.355.288-.643.643-.643h2.727c.355 0 .643.288.643.643v9.949zm-1.36-11.38c-.85 0-1.537-.687-1.537-1.537 0-.85.687-1.537 1.537-1.537.85 0 1.537.687 1.537 1.537 0 .85-.687 1.537-1.537 1.537zm6.757 11.38c0 .355-.288.643-.643.643h-2.727c-.355 0-.643-.288-.643-.643V9.873c0-.355.288-.643.643-.643h2.727c.355 0 .643.288.643.643v8.974zm1.905-9.45c0 .355-.288.643-.643.643h-2.727c-.355 0-.643-.288-.643-.643V5.597c0-.355.288-.643.643-.643h2.727c.355 0 .643.288.643.643v3.32z" />
                             </svg>
                         </a>
                         <a

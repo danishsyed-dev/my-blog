@@ -8,6 +8,7 @@ export interface BlogPost {
     readTime: string;
     featured: boolean;
     coverImage?: string;
+    coverGradient?: string;
     githubUrl?: string;
     liveUrl?: string;
 }
@@ -15,6 +16,7 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
     {
         id: 'fifa-match-outcome-predictor',
+        coverImage: 'https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=1200&auto=format&fit=crop',
         title: 'FIFA World Cup Match Outcome Predictor',
         excerpt: 'How I built an ML system that predicts Win / Draw / Loss for any international football match using Elo ratings, recent form, and head-to-head records.',
         content: `
@@ -100,10 +102,12 @@ This project shows that domain knowledge - building a proper Elo system, encodin
         date: '2026-06-02',
         readTime: '6 min read',
         featured: true,
+        coverGradient: 'linear-gradient(135deg, #1a4731 0%, #2d7a4f 40%, #1e6b5e 70%, #0f3d2e 100%)',
         githubUrl: 'https://github.com/danishsyed-dev/FIFA-World-Cup-Match-Outcome-Predictor',
     },
     {
         id: 'building-production-ready-ml-pipeline',
+        coverImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop',
         title: 'Building a Production-Ready ML Pipeline: The ML Income Predictor',
         excerpt: 'A deep dive into transitioning from a basic Jupyter Notebook to a fully object-oriented, production-ready Machine Learning pipeline and web application for demographic income classification.',
         content: `
@@ -171,10 +175,12 @@ Check out the full source code and documentation on the GitHub repository to see
         date: '2026-02-27',
         readTime: '6 min read',
         featured: true,
+        coverGradient: 'linear-gradient(135deg, #1a1a3e 0%, #2d2d6b 40%, #3a2060 70%, #1a1040 100%)',
         githubUrl: 'https://github.com/danishsyed-dev/InComeIQ',
     },
     {
         id: 'relaycontext-a-cli-tool-for-ai-coding-context-persistence',
+        coverImage: 'https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=1200&auto=format&fit=crop',
         title: 'RelayContext: A CLI Tool for AI Coding Context Persistence',
         excerpt: 'A practical guide to building RelayContext, a Node.js CLI tool that captures and persists structured AI coding context — reasoning, decisions, and task state — alongside Git branches.',
         content: `
@@ -282,10 +288,12 @@ Check out the [project on GitHub](https://github.com/danishsyed-dev/RelayContext
         date: '2026-02-22',
         readTime: '8 min read',
         featured: true,
+        coverGradient: 'linear-gradient(135deg, #1c2b1c 0%, #2a4a2a 40%, #1e3a3a 70%, #0f2020 100%)',
         githubUrl: 'https://github.com/danishsyed-dev/RelayContext',
     },
     {
         id: 'dynamic-pricing-ml-system',
+        coverImage: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1200&auto=format&fit=crop',
         title: 'How I Built a Dynamic Pricing ML System',
         excerpt: 'A deep dive into building a production-ready system for dynamic pricing using machine learning.',
         content: `
@@ -346,10 +354,12 @@ python application.py
         date: '2025-10-15',
         readTime: '8 min read',
         featured: true,
+        coverGradient: 'linear-gradient(135deg, #2b1a0e 0%, #5c3410 40%, #8b4513 60%, #3d1f08 100%)',
         githubUrl: 'https://github.com/danishsyed-dev/ml-sales-prediction',
     },
     {
         id: 'silver-price-prediction-india',
+        coverImage: 'https://images.unsplash.com/photo-1610375228911-c4bb02f38e76?q=80&w=1200&auto=format&fit=crop',
         title: 'How I Built a Silver Price Prediction Model and Shipped it Live',
         excerpt: 'An end-to-end machine learning project to predict silver prices for the Indian market — from model training to live deployment on Hugging Face Spaces.',
         content: `
@@ -480,11 +490,13 @@ This project is for educational purposes only. Actual silver prices at jewellers
         date: '2025-10-15',
         readTime: '10 min read',
         featured: true,
+        coverGradient: 'linear-gradient(135deg, #1a1a2e 0%, #2c2c52 40%, #3d3470 65%, #1a153a 100%)',
         githubUrl: 'https://github.com/danishsyed-dev/Silver-Price-Prediction',
         liveUrl: 'https://danishali11903-silver-price-prediction.hf.space',
     },
     {
         id: 'food-extractor',
+        coverImage: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=1200&auto=format&fit=crop',
         title: 'Food Extractor: Fine-Tuning Gemma 3 270M for Structured Data Extraction',
         excerpt: 'A hands-on tutorial on fully fine-tuning Google\'s Gemma 3 270M model using Hugging Face libraries to extract food and drink items from text with structured output.',
         content: `
@@ -607,10 +619,12 @@ Check out the [full notebook on Google Colab](https://colab.research.google.com/
         date: '2026-02-03',
         readTime: '12 min read',
         featured: true,
+        coverGradient: 'linear-gradient(135deg, #0d1f2d 0%, #1a3a4a 40%, #2a5068 65%, #0a1520 100%)',
         githubUrl: 'https://github.com/danishsyed-dev/NVIDIA-DGX-Spark-hugging_face_llm_full_fine_tune_tutorial-VIDEO',
     },
     {
         id: 'building-rag-system-fastapi',
+        coverImage: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1200&auto=format&fit=crop',
         title: 'How I Built a RAG System with FastAPI',
         excerpt: 'A deep dive into building a production-ready Retrieval-Augmented Generation system, covering architecture decisions, chunking strategies, and performance optimization.',
         content: `
@@ -679,10 +693,12 @@ Building a RAG system requires careful attention to each component in the pipeli
         date: '2025-10-15',
         readTime: '8 min read',
         featured: true,
+        coverGradient: 'linear-gradient(135deg, #1f0a2d 0%, #3d1a52 40%, #5c2875 65%, #1a0820 100%)',
         githubUrl: 'https://github.com/danishsyed-dev/RAG-API',
     },
     {
         id: 'comparing-ml-models-cancer-prediction',
+        coverImage: 'https://images.unsplash.com/photo-1530026405186-ed1ea0ac7a63?q=80&w=1200&auto=format&fit=crop',
         title: 'Comparing ML Models for Cancer Prediction',
         excerpt: 'A comprehensive analysis of machine learning algorithms for cancer prediction, examining accuracy, interpretability, and clinical applicability.',
         content: `
@@ -740,10 +756,12 @@ These align with known clinical indicators, increasing model trustworthiness.
         date: '2025-11-08',
         readTime: '10 min read',
         featured: true,
+        coverGradient: 'linear-gradient(135deg, #2d0a0a 0%, #4a1010 40%, #6b1818 60%, #1f0505 100%)',
         githubUrl: 'https://github.com/danishsyed-dev/Scrutinizing-ML-Models-for-Cancer-Prediction',
     },
     {
         id: 'dataset-engineering-sports-analytics',
+        coverImage: 'https://images.unsplash.com/photo-1431324155629-1a6edd1d141d?q=80&w=1200&auto=format&fit=crop',
         title: 'Dataset Engineering for Sports Analytics',
         excerpt: 'Lessons learned from building comprehensive sports analytics datasets, covering data collection, cleaning, and feature engineering.',
         content: `

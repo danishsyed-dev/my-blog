@@ -9,20 +9,46 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
     return (
-        <div className="pt-24 pb-16">
-            <div className="container-main">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-                    {/* Left Column - Info */}
-                    <div>
-                        <header className="mb-8">
-                            <h1 className="font-serif text-4xl md:text-5xl font-bold text-[var(--foreground)] mb-4">
-                                Get in Touch
-                            </h1>
-                            <p className="text-xl text-[var(--foreground-muted)]">
-                                Interested in collaboration, research opportunities, or just want to
-                                discuss AI/ML topics? I&apos;d love to hear from you.
-                            </p>
-                        </header>
+        <div>
+            {/* ── Page Hero Banner ── */}
+            <div className="page-hero-banner pt-24" style={{
+                background: 'linear-gradient(135deg, #1f0f24 0%, #2f1737 35%, #421e4f 65%, #180c1d 100%)'
+            }}>
+                {/* Background image overlay */}
+                <img 
+                    src="https://images.unsplash.com/photo-1534536281715-e28d76689b4d?q=80&w=1200&auto=format&fit=crop"
+                    alt=""
+                    aria-hidden="true"
+                    className="page-hero-bg-image"
+                />
+                <div className="page-hero-noise" />
+                <div className="page-hero-glyph" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="0.75">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                    </svg>
+                </div>
+                <div className="page-hero-shimmer" />
+                <div className="container-main">
+                    <div className="page-hero-content">
+                        <span className="page-hero-eyebrow">Say Hello</span>
+                        <h1 className="page-hero-title">Get in Touch</h1>
+                        <p className="page-hero-subtitle">
+                            Interested in collaboration, research opportunities, or just want to discuss AI/ML topics? I&apos;d love to hear from you.
+                        </p>
+                        <div className="page-hero-meta">
+                            <span>Typically responds in 24-48 hours</span>
+                            <span className="page-hero-dot" />
+                            <span>AI · ML · Collaboration</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="pb-16 pt-12">
+                <div className="container-main">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+                        {/* Left Column - Info */}
+                        <div>
 
                         {/* Contact Info */}
                         <div className="space-y-6 mb-12">
@@ -111,5 +137,6 @@ export default function ContactPage() {
                 </div>
             </div>
         </div>
+    </div>
     );
 }
