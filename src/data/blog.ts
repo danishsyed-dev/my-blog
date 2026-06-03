@@ -14,7 +14,96 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
     {
-        id: 'income-iq-building-production-ready-ml',
+        id: 'fifa-match-outcome-predictor',
+        title: 'FIFA World Cup Match Outcome Predictor',
+        excerpt: 'How I built an ML system that predicts Win / Draw / Loss for any international football match using Elo ratings, recent form, and head-to-head records.',
+        content: `
+## Introduction
+
+**Given Team A vs Team B, predict Win / Draw / Loss probability using historical international football data.**
+
+Predicting football match outcomes is one of the hardest problems in sports analytics — expert forecasters only achieve 55–60% accuracy. This project tackles the challenge head-on by engineering rich, domain-aware features and comparing four machine learning models to see what's actually possible.
+
+## 🏆 Feature Engineering
+
+The key insight here is that **raw stats alone aren't enough** — you need to encode what actually determines a match outcome. I engineered six core features:
+
+| Feature | Description |
+|---------|-------------|
+| **Elo Rating System** | Built from scratch using the World Football Elo formula |
+| **Recent Form** | Last 5 matches - Win=3, Draw=1, Loss=0 |
+| **Goals Scored / Conceded** | Rolling average over last 5 matches |
+| **Head-to-Head Record** | Last 10 meetings between the two teams |
+| **Home Advantage** | Encoded as 1 (home) or 0 (neutral venue) |
+| **Tournament Weight** | Friendly → Qualifier → Continental → World Cup (0–4) |
+
+Building a custom Elo calculator from scratch was the most interesting part — the standard formula dynamically adjusts ratings after every match result, meaning every game in history contributes to the final team strength estimate.
+
+## 📊 Models Evaluated
+
+| Model | Role |
+|-------|------|
+| Logistic Regression | Baseline |
+| Random Forest | Ensemble |
+| XGBoost | Primary |
+| LightGBM | Primary |
+
+**Target accuracy: 55-70%** - matching or beating expert forecasters is the benchmark.
+
+## 🗂️ Project Structure
+
+\`\`\`
+match-outcome-predictor/
+├── data/
+│   ├── results.csv          ← Historical match results (Kaggle)
+│   └── elo.csv              ← Optional Elo ratings dataset
+├── notebooks/
+│   └── analysis.ipynb       ← EDA + feature exploration
+├── src/
+│   ├── data_loader.py       ← Load & clean datasets
+│   ├── elo_calculator.py    ← Custom Elo rating system
+│   ├── feature_engineering.py
+│   ├── train.py             ← Train & evaluate models
+│   └── predict.py           ← Prediction interface
+├── models/                  ← Saved .pkl model files
+└── app/
+    └── streamlit_app.py     ← Interactive web dashboard
+\`\`\`
+
+## ⚡ Quick Start
+
+\`\`\`bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Train all models
+python src/train.py
+
+# Launch the interactive dashboard
+streamlit run app/streamlit_app.py
+\`\`\`
+
+Training will load and clean data, calculate Elo ratings from scratch, engineer all features, train all four models, save artifacts to \`models/\`, and generate evaluation plots.
+
+## 🛠️ Technical Stack
+
+- **Machine Learning**: Scikit-Learn, XGBoost, LightGBM, Pandas, NumPy
+- **Data Source**: International Football Results 1872–2026 (Kaggle)
+- **Dashboard**: Streamlit
+- **Visualization**: Matplotlib, Seaborn
+
+## Conclusion
+
+This project shows that domain knowledge - building a proper Elo system, encoding form, weighting tournament types - matters far more than model complexity. The feature engineering pipeline is the real differentiator, not the algorithm choice.
+        `.trim(),
+        tags: ['FIFA', 'Football', 'Machine Learning','Prediction', 'Sports Analytics', 'Python', 'XGBoost', 'LightGBM', 'Elo Rating', 'Pandas', 'Streamlit', 'Feature Engineering'],
+        date: '2024-01-01',
+        readTime: '6 min read',
+        featured: true,
+        githubUrl: 'https://github.com/danishsyed-dev/FIFA-World-Cup-Match-Outcome-Predictor',
+    },
+    {
+        id: 'building-production-ready-ml-pipeline',
         title: 'Building a Production-Ready ML Pipeline: The ML Income Predictor',
         excerpt: 'A deep dive into transitioning from a basic Jupyter Notebook to a fully object-oriented, production-ready Machine Learning pipeline and web application for demographic income classification.',
         content: `
