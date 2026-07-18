@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { projects, getProjectById } from '@/data/projects';
+import { SafeHeroImage } from '@/components';
 
 interface ProjectPageProps {
     params: Promise<{ id: string }>;
@@ -61,12 +62,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             }}>
                 {/* Background image overlay */}
                 {project.image && (
-                    <img 
+                    <SafeHeroImage 
                         src={project.image}
-                        alt=""
-                        aria-hidden="true"
                         className="page-hero-bg-image"
-                        style={{ opacity: 0.15 }}
+                        style={{ opacity: 0.06 }}
                     />
                 )}
                 <div className="page-hero-noise" />

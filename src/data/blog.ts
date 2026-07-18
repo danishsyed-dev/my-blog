@@ -16,7 +16,7 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
     {
         id: 'fifa-match-outcome-predictor',
-        coverImage: 'https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=1200&auto=format&fit=crop',
+        coverImage: 'https://picsum.photos/seed/fifa-match-outcome-predictor/600/400',
         title: 'FIFA World Cup Match Outcome Predictor',
         excerpt: 'How I built an ML system that predicts Win / Draw / Loss for any international football match using Elo ratings, recent form, and head-to-head records.',
         content: `
@@ -107,7 +107,7 @@ This project shows that domain knowledge - building a proper Elo system, encodin
     },
     {
         id: 'building-production-ready-ml-pipeline',
-        coverImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop',
+        coverImage: 'https://picsum.photos/seed/building-production-ready-ml-pipeline/600/400',
         title: 'Building a Production-Ready ML Pipeline: The ML Income Predictor',
         excerpt: 'A deep dive into transitioning from a basic Jupyter Notebook to a fully object-oriented, production-ready Machine Learning pipeline and web application for demographic income classification.',
         content: `
@@ -180,7 +180,7 @@ Check out the full source code and documentation on the GitHub repository to see
     },
     {
         id: 'relaycontext-a-cli-tool-for-ai-coding-context-persistence',
-        coverImage: 'https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=1200&auto=format&fit=crop',
+        coverImage: 'https://picsum.photos/seed/relaycontext-a-cli-tool-for-ai-coding-context-persistence/600/400',
         title: 'RelayContext: A CLI Tool for AI Coding Context Persistence',
         excerpt: 'A practical guide to building RelayContext, a Node.js CLI tool that captures and persists structured AI coding context — reasoning, decisions, and task state — alongside Git branches.',
         content: `
@@ -293,7 +293,7 @@ Check out the [project on GitHub](https://github.com/danishsyed-dev/RelayContext
     },
     {
         id: 'dynamic-pricing-ml-system',
-        coverImage: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1200&auto=format&fit=crop',
+        coverImage: 'https://picsum.photos/seed/dynamic-pricing-ml-system/600/400',
         title: 'How I Built a Dynamic Pricing ML System',
         excerpt: 'A deep dive into building a production-ready system for dynamic pricing using machine learning.',
         content: `
@@ -359,7 +359,7 @@ python application.py
     },
     {
         id: 'silver-price-prediction-india',
-        coverImage: 'https://images.unsplash.com/photo-1610375228911-c4bb02f38e76?q=80&w=1200&auto=format&fit=crop',
+        coverImage: 'https://picsum.photos/seed/silver-price-prediction-india/600/400',
         title: 'How I Built a Silver Price Prediction Model and Shipped it Live',
         excerpt: 'An end-to-end machine learning project to predict silver prices for the Indian market — from model training to live deployment on Hugging Face Spaces.',
         content: `
@@ -496,7 +496,7 @@ This project is for educational purposes only. Actual silver prices at jewellers
     },
     {
         id: 'food-extractor',
-        coverImage: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=1200&auto=format&fit=crop',
+        coverImage: 'https://picsum.photos/seed/food-extractor/600/400',
         title: 'Food Extractor: Fine-Tuning Gemma 3 270M for Structured Data Extraction',
         excerpt: 'A hands-on tutorial on fully fine-tuning Google\'s Gemma 3 270M model using Hugging Face libraries to extract food and drink items from text with structured output.',
         content: `
@@ -624,7 +624,7 @@ Check out the [full notebook on Google Colab](https://colab.research.google.com/
     },
     {
         id: 'building-rag-system-fastapi',
-        coverImage: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1200&auto=format&fit=crop',
+        coverImage: 'https://picsum.photos/seed/building-rag-system-fastapi/600/400',
         title: 'How I Built a RAG System with FastAPI',
         excerpt: 'A deep dive into building a production-ready Retrieval-Augmented Generation system, covering architecture decisions, chunking strategies, and performance optimization.',
         content: `
@@ -698,7 +698,7 @@ Building a RAG system requires careful attention to each component in the pipeli
     },
     {
         id: 'comparing-ml-models-cancer-prediction',
-        coverImage: 'https://images.unsplash.com/photo-1530026405186-ed1ea0ac7a63?q=80&w=1200&auto=format&fit=crop',
+        coverImage: 'https://picsum.photos/seed/comparing-ml-models-cancer-prediction/600/400',
         title: 'Comparing ML Models for Cancer Prediction',
         excerpt: 'A comprehensive analysis of machine learning algorithms for cancer prediction, examining accuracy, interpretability, and clinical applicability.',
         content: `
@@ -761,7 +761,7 @@ These align with known clinical indicators, increasing model trustworthiness.
     },
     {
         id: 'dataset-engineering-sports-analytics',
-        coverImage: 'https://images.unsplash.com/photo-1431324155629-1a6edd1d141d?q=80&w=1200&auto=format&fit=crop',
+        coverImage: 'https://picsum.photos/seed/dataset-engineering-sports-analytics/600/400',
         title: 'Dataset Engineering for Sports Analytics',
         excerpt: 'Lessons learned from building comprehensive sports analytics datasets, covering data collection, cleaning, and feature engineering.',
         content: `

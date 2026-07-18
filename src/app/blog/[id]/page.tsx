@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { blogPosts, getPostById } from '@/data/blog';
 import { siteConfig } from '@/data/site';
+import { CopyButton, FloatingActions, SafeHeroImage } from '@/components';
 
 interface BlogPostPageProps {
     params: Promise<{ id: string }>;
@@ -38,6 +39,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         notFound();
     }
 
+    const currentIndex = blogPosts.findIndex((p) => p.id === post.id);
+    const prevPost = currentIndex > 0 ? blogPosts[currentIndex - 1] : null;
+    const nextPost = currentIndex < blogPosts.length - 1 ? blogPosts[currentIndex + 1] : null;
+
     // Process inline formatting (bold, italic, inline code)
     const processInline = (text: string): string => {
         return text
@@ -50,6 +55,65 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
     // Full markdown-like rendering
     const renderContent = (content: string) => {
+        const getHeaderIcon = (text: string) => {
+            const lower = text.toLowerCase();
+            if (lower.includes('introduction') || lower.includes('inspiration')) {
+                return (
+                    <svg className="w-5 h-5 text-[var(--accent)] flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                    </svg>
+                );
+            }
+            if (lower.includes('problem') || lower.includes('challenge') || lower.includes('disclaimer') || lower.includes('roadblock')) {
+                return (
+                    <svg className="w-5 h-5 text-amber-500 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                );
+            }
+            if (lower.includes('solution') || lower.includes('conclusion') || lower.includes('takeaway') || lower.includes('lessons learned') || lower.includes('result')) {
+                return (
+                    <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                );
+            }
+            if (lower.includes('feature') || lower.includes('highlight')) {
+                return (
+                    <svg className="w-5 h-5 text-[var(--accent)] flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                    </svg>
+                );
+            }
+            if (lower.includes('architecture') || lower.includes('structure') || lower.includes('flow')) {
+                return (
+                    <svg className="w-5 h-5 text-[var(--accent)] flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                    </svg>
+                );
+            }
+            if (lower.includes('stack') || lower.includes('technology') || lower.includes('model') || lower.includes('engineering') || lower.includes('evaluated')) {
+                return (
+                    <svg className="w-5 h-5 text-[var(--accent)] flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 01-6 0z" />
+                    </svg>
+                );
+            }
+            if (lower.includes('quick start') || lower.includes('install') || lower.includes('usage') || lower.includes('step-by-step') || lower.includes('run')) {
+                return (
+                    <svg className="w-5 h-5 text-[var(--accent)] flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                );
+            }
+            return (
+                <svg className="w-5 h-5 text-[var(--accent)] flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+            );
+        };
+
         const lines = content.split('\n');
         const elements: React.ReactNode[] = [];
         let currentList: string[] = [];
@@ -120,15 +184,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
         const flushCodeBlock = () => {
             if (codeBlockLines.length > 0 || codeBlockLang) {
+                const codeText = codeBlockLines.join('\n');
                 elements.push(
                     <div key={`code-${keyCounter++}`} className="code-block">
-                        {codeBlockLang && (
-                            <div className="code-block-header">
-                                {codeBlockLang}
-                            </div>
-                        )}
+                        <div className="code-block-header flex justify-between items-center">
+                            <span>{codeBlockLang || 'code'}</span>
+                            <CopyButton text={codeText} />
+                        </div>
                         <pre>
-                            <code>{codeBlockLines.join('\n')}</code>
+                            <code>{codeText}</code>
                         </pre>
                     </div>
                 );
@@ -201,9 +265,21 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             // --- Headers ---
             if (trimmedLine.startsWith('## ')) {
                 flushList();
+                const cleanText = trimmedLine.slice(3)
+                    .replace(/[\uD800-\uDBFF\uDC00-\uDFFF]/g, '')
+                    .replace(/[\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDC00-\uDFFF]/g, '')
+                    .trim();
+                const lastElement = elements[elements.length - 1];
+                const wasHr = lastElement && (lastElement as any).type === 'hr';
+                if (elements.length > 0 && !wasHr) {
+                    elements.push(
+                        <hr key={`hr-pre-h2-${keyCounter++}`} className="my-8 border-t border-[var(--border)]" />
+                    );
+                }
                 elements.push(
-                    <h2 key={`h2-${keyCounter++}`} className="font-serif text-2xl font-bold text-[var(--foreground)] mt-8 mb-4">
-                        {trimmedLine.slice(3)}
+                    <h2 key={`h2-${keyCounter++}`} className="font-serif text-2xl font-bold text-[var(--foreground)] mt-8 mb-4 flex items-center gap-3">
+                        {getHeaderIcon(cleanText)}
+                        <span>{cleanText}</span>
                     </h2>
                 );
             } else if (trimmedLine.startsWith('### ')) {
@@ -280,27 +356,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             }}>
                 {/* Background image overlay */}
                 {post.coverImage && (
-                    <img 
+                    <SafeHeroImage 
                         src={post.coverImage}
-                        alt=""
-                        aria-hidden="true"
-                        className="page-hero-bg-image"
-                        style={{ opacity: 0.15 }}
+                        className="page-hero-bg-image opacity-[0.06]"
                     />
                 )}
                 <div className="page-hero-noise" />
-                <div className="page-hero-glyph" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="0.75">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                    </svg>
-                </div>
-                <div className="page-hero-shimmer" />
                 <div className="container-narrow">
                     {/* Back Link */}
                     <Link
                         href="/blog"
-                        className="inline-flex items-center gap-2 text-[var(--foreground-muted)] hover:text-[var(--accent)] transition-colors mb-8 relative z-10"
-                        style={{ color: 'rgba(255,255,255,0.6)' }}
+                        className="inline-flex items-center gap-2 text-white/60 hover:text-[var(--accent)] transition-colors mb-8 relative z-10"
                     >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -309,7 +375,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     </Link>
 
                     <div className="page-hero-content">
-                        <div className="flex items-center gap-4 mb-4 text-xs font-semibold tracking-wider text-[var(--foreground-subtle)]" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                        <div className="flex items-center gap-4 mb-4 text-xs font-semibold tracking-wider text-white/50">
                             <time>
                                 {new Date(post.date).toLocaleDateString('en-US', {
                                     year: 'numeric',
@@ -334,12 +400,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                                 <Link
                                     key={tag}
                                     href={`/blog?tag=${encodeURIComponent(tag)}`}
-                                    className="tag hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors"
-                                    style={{ 
-                                        borderColor: 'rgba(255,255,255,0.15)',
-                                        color: 'rgba(255,255,255,0.8)',
-                                        background: 'rgba(255,255,255,0.04)'
-                                    }}
+                                    className="tag border border-white/15 text-white/80 bg-white/5 hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors"
                                 >
                                     {tag}
                                 </Link>
@@ -348,7 +409,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
                         {/* Action Buttons */}
                         {(post.githubUrl || post.liveUrl) && (
-                            <div className="flex flex-wrap gap-3 pt-4 border-t border-[var(--border)]" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
+                            <div className="flex flex-wrap gap-3 pt-4 border-t border-white/10">
                                 {post.githubUrl && (
                                     <a
                                         href={post.githubUrl}
@@ -367,11 +428,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                                         href={post.liveUrl}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="btn btn-secondary text-sm"
-                                        style={{ 
-                                            borderColor: 'rgba(255,255,255,0.2)',
-                                            color: '#ffffff'
-                                        }}
+                                        className="btn btn-secondary text-sm border border-white/20 text-white"
                                     >
                                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -394,6 +451,108 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 <div className="prose max-w-none">
                     {renderContent(post.content)}
                 </div>
+
+                {/* 💬 What do you think? */}
+                <hr className="my-8 border-t border-[var(--border)]" />
+                <div className="p-8 bg-[var(--background-secondary)] border border-[var(--border)] hover:border-[var(--accent)] border-opacity-40 rounded-xl transition-all duration-300 relative overflow-hidden group">
+                    <h3 className="font-serif text-xl font-bold text-[var(--foreground)] mb-3 flex items-center gap-2.5">
+                        <svg className="w-5 h-5 text-[var(--accent)] flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                        </svg>
+                        What do you think?
+                    </h3>
+                    <p className="text-[var(--foreground-muted)] text-sm mb-0">
+                        Would you build a project like this? If you have questions about the models, tech stack, or implementation details, drop an issue on GitHub or get in touch on the contact page!
+                    </p>
+                </div>
+
+                {/* 👤 About the Author */}
+                <hr className="my-8 border-t border-[var(--border)]" />
+                <div className="p-8 bg-[var(--background-secondary)] border border-[var(--border)] hover:border-[var(--accent)] border-opacity-40 rounded-xl transition-all duration-300 relative overflow-hidden group">
+                    <div className="flex flex-col md:flex-row gap-6 items-start">
+                        <div 
+                            className="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0 border text-[var(--accent)]"
+                            style={{
+                                backgroundColor: 'color-mix(in srgb, var(--accent) 10%, transparent)',
+                                borderColor: 'color-mix(in srgb, var(--accent) 20%, transparent)'
+                            }}
+                        >
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 className="font-serif text-xl font-bold text-[var(--foreground)] mb-2">
+                                About the Author
+                            </h3>
+                            <p className="text-[var(--foreground-muted)] text-sm mb-4 leading-relaxed">
+                                <strong className="text-[var(--foreground)]">{siteConfig.name}</strong> is an AI & ML Engineer specializing in building data-driven systems, intelligent models, and applied research solutions.
+                            </p>
+                            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                                <span className="text-xs text-[var(--foreground-subtle)] flex items-center gap-1.5">
+                                    <svg className="w-3.5 h-3.5 text-[var(--accent)] flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+                                    </svg>
+                                    Open to freelance projects, full-time engineering roles, and AI/ML collaborations.
+                                </span>
+                                <a
+                                    href={siteConfig.resume.downloadUrl}
+                                    className="btn btn-secondary !text-xs !py-1.5 !px-3 inline-flex items-center gap-1.5 self-start sm:self-auto"
+                                >
+                                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
+                                    Download CV
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* ── Navigation Links (Next/Prev) ── */}
+                {(prevPost || nextPost) && (
+                    <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {prevPost && (
+                            <Link
+                                href={`/blog/${prevPost.id}`}
+                                className={`p-6 bg-[var(--background-secondary)] border border-[var(--border)] hover:border-[var(--accent)] rounded-xl transition-all group flex flex-col items-start text-left ${
+                                    !nextPost ? 'col-span-full' : ''
+                                }`}
+                            >
+                                <span className="text-xs text-[var(--foreground-subtle)] mb-2 flex items-center gap-1.5 font-medium">
+                                    <svg className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                                    </svg>
+                                    Previous Article
+                                </span>
+                                <span className="font-serif font-bold text-base text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors line-clamp-2">
+                                    {prevPost.title}
+                                </span>
+                            </Link>
+                        )}
+                        {nextPost && (
+                            <Link
+                                href={`/blog/${nextPost.id}`}
+                                className={`p-6 bg-[var(--background-secondary)] border border-[var(--border)] hover:border-[var(--accent)] rounded-xl transition-all group flex flex-col ${
+                                    !prevPost ? 'col-span-full items-start text-left' : 'items-end text-right'
+                                }`}
+                            >
+                                <span className="text-xs text-[var(--foreground-subtle)] mb-2 flex items-center gap-1.5 font-medium">
+                                    Next Article
+                                    <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                    </svg>
+                                </span>
+                                <span className="font-serif font-bold text-base text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors line-clamp-2">
+                                    {nextPost.title}
+                                </span>
+                            </Link>
+                        )}
+                    </div>
+                )}
+
+                {/* Floating Actions Capsule */}
+                <FloatingActions githubUrl={post.githubUrl} liveUrl={post.liveUrl} />
 
                 {/* Footer */}
                 <footer className="mt-16 pt-8 border-t border-[var(--border)]">

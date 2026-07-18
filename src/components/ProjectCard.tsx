@@ -108,6 +108,9 @@ export default function ProjectCard({ project, variant = 'default', index = 0 }:
                         aria-hidden="true"
                         loading="lazy"
                         className="blog-card-cover-img"
+                        onError={(e) => {
+                            (e.target as HTMLElement).style.display = 'none';
+                        }}
                     />
                 )}
             </div>

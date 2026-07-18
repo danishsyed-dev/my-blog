@@ -23,7 +23,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 'fifa-match-outcome-predictor',
-    image: 'https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=1200&auto=format&fit=crop',
+    image: 'https://picsum.photos/seed/fifa-match-outcome-predictor/600/400',
     title: 'FIFA World Cup Match Outcome Predictor',
     subtitle: 'Win / Draw / Loss Predictor',
     description: 'An ML system that predicts the outcome of any international football match using Elo ratings, recent form, head-to-head records, and tournament weights - achieving accuracy that matches expert forecasters.',
@@ -39,7 +39,7 @@ export const projects: Project[] = [
   },
   {
     id: 'ML-Income-Predictor',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop',
+    image: 'https://picsum.photos/seed/ML-Income-Predictor/600/400',
     title: 'InComeIQ',
     subtitle: 'ML Income Predictor',
     description: 'A production-ready Machine Learning pipeline and web application for demographic income classification. It features an object-oriented training pipeline, REST APIs, and dynamic feature explainability.',
@@ -55,7 +55,7 @@ export const projects: Project[] = [
   },
   {
     id: 'relay-context',
-    image: 'https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=1200&auto=format&fit=crop',
+    image: 'https://picsum.photos/seed/relay-context/600/400',
     title: 'RelayContext',
     description: 'A Node.js-based CLI tool that captures and persists structured AI coding context-reasoning, decisions, and task state-alongside Git branches. It enables seamless continuation of AI-assisted development across sessions, IDEs, and devices without re-explaining project architecture or progress.',
     problemStatement: 'AI-assisted coding sessions lose critical context whenever a developer switches branches, devices, or IDEs. Re-explaining project architecture, prior decisions, and task progress to an AI assistant is tedious and error-prone, leading to inconsistencies and wasted time.',
@@ -70,7 +70,7 @@ export const projects: Project[] = [
   },
   {
     id: 'housing-price-prediction',
-    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1200&auto=format&fit=crop',
+    image: 'https://picsum.photos/seed/housing-price-prediction/600/400',
     title: 'Housing Price Prediction System',
     description: 'An end-to-end machine learning pipeline for predicting housing prices, built with ZenML for orchestration and MLflow for experiment tracking and model management.',
     problemStatement: 'Predicting housing prices accurately requires handling complex feature interactions, missing data, and regional variations. Many ML projects lack reproducibility and proper experiment tracking, making it difficult to iterate on models and deploy reliably.',
@@ -85,7 +85,7 @@ export const projects: Project[] = [
   },
   {
     id: 'silver-price-prediction',
-    image: 'https://images.unsplash.com/photo-1610375228911-c4bb02f38e76?q=80&w=1200&auto=format&fit=crop',
+    image: 'https://picsum.photos/seed/silver-price-prediction/600/400',
     title: 'Silver Price Prediction Model',
     description: 'An end-to-end machine learning project to predict silver prices for the Indian market, served through a Flask-based REST API.',
     problemStatement: 'Silver prices in the Indian market are influenced by global spot prices, currency exchange rates, import duties, and local premiums. Investors and traders need accurate, timely predictions that account for these India-specific factors to make informed decisions.',
@@ -101,7 +101,7 @@ export const projects: Project[] = [
   },
   {
     id: 'rag-fastapi',
-    image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1200&auto=format&fit=crop',
+    image: 'https://picsum.photos/seed/rag-fastapi/600/400',
     title: 'RAG API Using FastAPI',
     description: 'A FastAPI-based Retrieval-Augmented Generation API using Ollama\'s TinyLlama and ChromaDB for generating contextual responses to user queries.',
     problemStatement: 'Large Language Models can hallucinate facts and lack access to domain-specific or up-to-date information. Organizations need systems that can ground LLM responses in their proprietary knowledge bases while maintaining low latency and high accuracy.',
@@ -116,7 +116,7 @@ export const projects: Project[] = [
   },
   {
     id: 'ml-sales-prediction',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1200&auto=format&fit=crop',
+    image: 'https://picsum.photos/seed/ml-sales-prediction/600/400',
     title: 'ML Sales Prediction',
     description: 'A dynamic pricing system for an online retailer using predictions served by a multi-layered Feedforward Neural Network, a LightGBM regressor, and an Elastic Net, hosted on a containerized serverless architecture.',
     problemStatement: 'Online retailers lose revenue through static pricing that fails to account for demand fluctuations, competitor pricing, and seasonal trends. A dynamic pricing system requires accurate sales predictions from multiple model perspectives to minimize risk and maximize margins.',
@@ -131,7 +131,7 @@ export const projects: Project[] = [
   },
   {
     id: 'meme-matcher',
-    image: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=1200&auto=format&fit=crop',
+    image: 'https://picsum.photos/seed/meme-matcher/600/400',
     title: 'Meme Matcher - Real-time Facial Expression to Meme Matching',
     description: 'A real-time computer vision application that matches facial expressions and hand gestures to iconic internet memes using MediaPipe\'s AI-powered face and hand detection.',
     problemStatement: 'Computer vision applications for facial expression recognition are typically limited to basic emotion classification. There is a gap for creative, interactive applications that combine face and hand gesture detection in real-time for entertainment purposes.',
@@ -146,7 +146,7 @@ export const projects: Project[] = [
   },
   {
     id: 'fine-tune-slm',
-    image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=1200&auto=format&fit=crop',
+    image: 'https://picsum.photos/seed/fine-tune-slm/600/400',
     title: 'Fully Fine-Tune a Small Language Model (Gemma 3 270M)',
     description: 'Supervised Fine-Tuning (SFT) of Google\'s Gemma 3 270M model for a specific task: extracting food and drink items from text. The fine-tuned model processes text inputs and returns structured data about food/drink content.',
     problemStatement: 'General-purpose language models lack the precision needed for domain-specific extraction tasks. Fine-tuning a small language model offers a cost-effective alternative to prompting large models, with faster inference and better accuracy for targeted use cases.',
@@ -162,7 +162,7 @@ export const projects: Project[] = [
   },
   {
     id: 'cancer-prediction-ml',
-    image: 'https://images.unsplash.com/photo-1530026405186-ed1ea0ac7a63?q=80&w=1200&auto=format&fit=crop',
+    image: 'https://picsum.photos/seed/cancer-prediction-ml/600/400',
     title: 'ML Models for Cancer Prediction',
     subtitle: 'Scrutinizing ML Models for Cancer Prediction',
     description: 'Built and evaluated machine learning models using patient records to predict lung cancer outcomes. Published findings in an academic journal.',
@@ -179,7 +179,7 @@ export const projects: Project[] = [
   },
   {
     id: 'premier-league-prediction',
-    image: 'https://images.unsplash.com/photo-1518063319789-7217e6706b04?q=80&w=1200&auto=format&fit=crop',
+    image: 'https://picsum.photos/seed/premier-league-prediction/600/400',
     title: 'Premier League 2025 ML Prediction',
     description: 'A machine learning model to predict outcomes of Premier League matches using historical data and statistical features.',
     problemStatement: 'Football match outcomes are influenced by numerous factors including team form, player fitness, home advantage, and historical matchups. Accurately modeling these interactions requires careful feature engineering and model selection to outperform naive prediction baselines.',
@@ -193,7 +193,7 @@ export const projects: Project[] = [
   },
   {
     id: 'streaming-text-trend-analysis',
-    image: 'https://images.unsplash.com/photo-1562577309-4932fdd64cd1?q=80&w=1200&auto=format&fit=crop',
+    image: 'https://picsum.photos/seed/streaming-text-trend-analysis/600/400',
     title: 'Streaming Text Trend Analysis',
     subtitle: 'Identifying Hot Topic Trends In Streaming Text Data',
     description: 'An NLP model to detect and visualize trending topics from real-time text streams using a sequential processing approach.',
@@ -208,7 +208,7 @@ export const projects: Project[] = [
   },
   {
     id: 'la-liga-forwards-analysis',
-    image: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1200&auto=format&fit=crop',
+    image: 'https://picsum.photos/seed/la-liga-forwards-analysis/600/400',
     title: 'La Liga Forwards Analysis',
     description: 'Statistical analysis of La Liga\'s greatest forwards with visualizations including bar charts and radar diagrams.',
     problemStatement: 'Football performance analysis often relies on basic metrics like goals and assists. Scouts and analysts need deeper insights into player contributions, playing styles, and comparative performance across different eras to make informed assessments.',
@@ -223,7 +223,7 @@ export const projects: Project[] = [
   },
   {
     id: 'life-rpg',
-    image: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=1200&auto=format&fit=crop',
+    image: 'https://picsum.photos/seed/life-rpg/600/400',
     title: 'Life RPG - Gamified Habit Tracker',
     description: 'A browser-based Life RPG that gamifies daily habits with quests, XP, levels, streaks, and achievements.',
     problemStatement: 'Traditional productivity and habit-tracking apps often fail to maintain long-term user engagement. Gamification principles from video games can provide intrinsic motivation, but most implementations are superficial and lack meaningful progression systems.',
@@ -238,7 +238,7 @@ export const projects: Project[] = [
   },
   {
     id: 'weather-forecast-app',
-    image: 'https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?q=80&w=1200&auto=format&fit=crop',
+    image: 'https://picsum.photos/seed/weather-forecast-app/600/400',
     title: 'Weather Forecast Web App',
     description: 'A responsive weather forecasting web application using OpenWeather API with a PHP backend for data processing.',
     problemStatement: 'Weather data is scattered across multiple providers with varying accuracy and update frequencies. Users need a clean, unified interface that presents actionable weather insights with an intuitive design and responsive layout.',
@@ -253,7 +253,7 @@ export const projects: Project[] = [
   },
   {
     id: 'smart-highway-light',
-    image: 'https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?q=80&w=1200&auto=format&fit=crop',
+    image: 'https://picsum.photos/seed/smart-highway-light/600/400',
     title: 'Smart Highway Light System',
     description: 'An IoT-enabled Arduino system that controls street lights using IR and LDR sensors with real-time logic for energy-efficient highway illumination.',
     problemStatement: 'Highway street lights running at full brightness throughout the night waste significant energy. A smart system that reacts to vehicle presence and ambient light conditions can dramatically reduce energy consumption while maintaining road safety.',

@@ -105,6 +105,9 @@ export default function BlogCard({ post, index = 0 }: BlogCardProps) {
                         aria-hidden="true"
                         loading="lazy"
                         className="blog-card-cover-img"
+                        onError={(e) => {
+                            (e.target as HTMLElement).style.display = 'none';
+                        }}
                     />
                 )}
             </div>

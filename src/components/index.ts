@@ -5,4 +5,9 @@ export { default as ProjectCard } from './ProjectCard';
 export { default as BlogCard } from './BlogCard';
 export { default as ContactForm } from './ContactForm';
 export { default as ThemeToggle } from './ThemeToggle';
+export { CopyButton } from './CopyButton';
+export { FloatingActions } from './FloatingActions';
+export { SafeHeroImage } from './SafeHeroImage';
+
+
 
