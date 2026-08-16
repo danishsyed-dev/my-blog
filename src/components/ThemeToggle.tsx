@@ -6,33 +6,32 @@ export default function ThemeToggle() {
     const [mounted, setMounted] = useState(false);
     const [isDark, setIsDark] = useState(false);
 
-    // After mounting, we can safely access document and localStorage
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setMounted(true);
-        const isDarkTheme = document.documentElement.classList.contains('dark');
-        setIsDark(isDarkTheme);
+
+        const root = document.documentElement;
+        const savedTheme = localStorage.getItem('theme');
+        const initialDark = savedTheme ? savedTheme === 'dark' : root.classList.contains('dark');
+
+        setIsDark(initialDark);
+        root.classList.toggle('dark', initialDark);
     }, []);
+
+    useEffect(() => {
+        if (!mounted) return;
+
+        document.documentElement.classList.toggle('dark', isDark);
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    }, [isDark, mounted]);
 
     const toggleTheme = () => {
         if (!mounted) return;
-
-        const nextDark = !isDark;
-        setIsDark(nextDark);
-
-        if (nextDark) {
-            document.documentElement.classList.add('dark');
-            localStorage.setItem('theme', 'dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-            localStorage.setItem('theme', 'light');
-        }
+        setIsDark((current) => !current);
     };
 
     if (!mounted) {
-        // Return a placeholder structure with same layout to prevent shifts
-        return (
-            <div className="w-8 h-8" aria-hidden="true" />
-        );
+        return <div className="w-8 h-8" aria-hidden="true" />;
     }
 
     return (

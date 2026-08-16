@@ -14,23 +14,19 @@ const categories: { id: Project['category'] | 'all'; label: string }[] = [
 ];
 
 function ProjectsContent() {
-    const [selectedCategory, setSelectedCategory] = useState<string>('all');
-
-    useEffect(() => {
-        // Read initial category from hash
-        const hash = window.location.hash.replace('#category-', '');
-        if (hash && categories.some(c => c.id === hash)) {
-            setSelectedCategory(hash);
+    const [selectedCategory, setSelectedCategory] = useState<string>(() => {
+        if (typeof window === 'undefined') {
+            return 'all';
         }
 
-        // Listen for hash changes
+        const hash = window.location.hash.replace('#category-', '');
+        return categories.some(c => c.id === hash) ? hash : 'all';
+    });
+
+    useEffect(() => {
         const handleHashChange = () => {
             const newHash = window.location.hash.replace('#category-', '');
-            if (newHash && categories.some(c => c.id === newHash)) {
-                setSelectedCategory(newHash);
-            } else if (!window.location.hash) {
-                setSelectedCategory('all');
-            }
+            setSelectedCategory(categories.some(c => c.id === newHash) ? newHash : 'all');
         };
 
         window.addEventListener('hashchange', handleHashChange);
@@ -40,10 +36,9 @@ function ProjectsContent() {
     const handleCategoryClick = (categoryId: string) => {
         setSelectedCategory(categoryId);
         if (categoryId === 'all') {
-            // Remove hash for 'all'
-            history.pushState(null, '', window.location.pathname);
+            window.history.pushState(null, '', window.location.pathname);
         } else {
-            window.location.hash = `category-${categoryId}`;
+            window.history.pushState(null, '', `${window.location.pathname}#category-${categoryId}`);
         }
     };
 

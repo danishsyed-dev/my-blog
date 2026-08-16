@@ -269,8 +269,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     .replace(/[\uD800-\uDBFF\uDC00-\uDFFF]/g, '')
                     .replace(/[\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDC00-\uDFFF]/g, '')
                     .trim();
-                const lastElement = elements[elements.length - 1];
-                const wasHr = lastElement && (lastElement as any).type === 'hr';
+                const lastElement = elements[elements.length - 1] as unknown;
+                const wasHr = typeof lastElement === 'object' && lastElement !== null && 'type' in lastElement && lastElement.type === 'hr';
                 if (elements.length > 0 && !wasHr) {
                     elements.push(
                         <hr key={`hr-pre-h2-${keyCounter++}`} className="my-8 border-t border-[var(--border)]" />

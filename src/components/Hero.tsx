@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { siteConfig } from '@/data/site';
 import { getFeaturedProjects } from '@/data/projects';
+import { OrcidIcon } from '@/components/OrcidIcon';
 
 export default function Hero() {
     const featuredProjects = getFeaturedProjects();
@@ -99,9 +100,7 @@ export default function Hero() {
                             className="text-[var(--foreground-muted)] hover:text-[var(--accent)] transition-colors"
                             aria-label="ORCID"
                         >
-                            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 24C5.373 24 0 18.627 0 12 0 5.373 5.373 0 12 0c6.627 0 12 5.373 12 12 0 6.627-5.373 12-12 12zM9.92 18.847c0 .355-.288.643-.643.643H6.55c-.355 0-.643-.288-.643-.643V8.898c0-.355.288-.643.643-.643h2.727c.355 0 .643.288.643.643v9.949zm-1.36-11.38c-.85 0-1.537-.687-1.537-1.537 0-.85.687-1.537 1.537-1.537.85 0 1.537.687 1.537 1.537 0 .85-.687 1.537-1.537 1.537zm6.757 11.38c0 .355-.288.643-.643.643h-2.727c-.355 0-.643-.288-.643-.643V9.873c0-.355.288-.643.643-.643h2.727c.355 0 .643.288.643.643v8.974zm1.905-9.45c0 .355-.288.643-.643.643h-2.727c-.355 0-.643-.288-.643-.643V5.597c0-.355.288-.643.643-.643h2.727c.355 0 .643.288.643.643v3.32z" />
-                            </svg>
+                            <OrcidIcon className="w-6 h-6" />
                         </a>
                         <a
                             href={`mailto:${siteConfig.social.email}`}

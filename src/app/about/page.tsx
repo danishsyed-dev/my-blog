@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { OrcidIcon } from '@/components/OrcidIcon';
 import { siteConfig } from '@/data/site';
 
 export const metadata: Metadata = {
@@ -117,9 +118,7 @@ export default function AboutPage() {
                                 rel="me noopener noreferrer"
                                 className="btn btn-secondary inline-flex items-center gap-2"
                             >
-                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 24C5.373 24 0 18.627 0 12 0 5.373 5.373 0 12 0c6.627 0 12 5.373 12 12 0 6.627-5.373 12-12 12zM9.92 18.847c0 .355-.288.643-.643.643H6.55c-.355 0-.643-.288-.643-.643V8.898c0-.355.288-.643.643-.643h2.727c.355 0 .643.288.643.643v9.949zm-1.36-11.38c-.85 0-1.537-.687-1.537-1.537 0-.85.687-1.537 1.537-1.537.85 0 1.537.687 1.537 1.537 0 .85-.687 1.537-1.537 1.537zm6.757 11.38c0 .355-.288.643-.643.643h-2.727c-.355 0-.643-.288-.643-.643V9.873c0-.355.288-.643.643-.643h2.727c.355 0 .643.288.643.643v8.974zm1.905-9.45c0 .355-.288.643-.643.643h-2.727c-.355 0-.643-.288-.643-.643V5.597c0-.355.288-.643.643-.643h2.727c.355 0 .643.288.643.643v3.32z" />
-                                </svg>
+                                <OrcidIcon className="w-4 h-4" />
                                 ORCID
                             </a>
                         </div>
