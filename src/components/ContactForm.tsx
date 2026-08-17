@@ -94,9 +94,16 @@ export default function ContactForm() {
         )}`;
 
         try {
-            window.location.href = mailtoLink;
+            const link = document.createElement('a');
+            link.href = mailtoLink;
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+
             setStatus('success');
         } catch (error) {
+            console.error('Failed to open mail client:', error);
             setStatus('error');
         }
     };
@@ -260,10 +267,10 @@ export default function ContactForm() {
                 <div className="p-5 bg-[var(--success)]/10 border border-[var(--success)]/20 rounded-lg space-y-4">
                     <div>
                         <p className="text-sm text-[var(--success)] font-medium mb-1">
-                            Email client redirect initiated!
+                            Your email app should open now.
                         </p>
                         <p className="text-xs text-[var(--foreground-muted)]">
-                            Your desktop/mobile mail client should have opened with the message pre-filled.
+                            This contact form opens your default mail app with a pre-filled message. If it didn&apos;t open, use the copy button below.
                         </p>
                     </div>
 
